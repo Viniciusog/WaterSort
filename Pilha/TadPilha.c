@@ -1,4 +1,3 @@
-// Feito por: Vin�cius de Oliveira Guimar�es
 #include <stdio.h>
 #include <stdlib.h>
 #include "pilha.h"
@@ -45,14 +44,14 @@ Pilha * liberaPilha(Pilha *s) {
 	return NULL;
 }
 
-// ---------- FUN��ES N�O PRIMITIVAS ----------
+// ---------- FUNÇÕES NÃO PRIMITIVAS ----------
 
 void inverterPilha(Pilha *s) {
-	// A primeira pilha ter� os dados invertidos
+	// A primeira pilha terá os dados invertidos
 	Pilha *s2;
 	s2 = criaPilha();
 
-	// Pegamos os dados de s2 e colocamos em s3. Ou seja, s3 ter� os itens da ordem
+	// Pegamos os dados de s2 e colocamos em s3. Ou seja, s3 terá os itens da ordem
 	// correta
 	Pilha *s3;
 	s3 = criaPilha();
@@ -67,8 +66,8 @@ void inverterPilha(Pilha *s) {
 		empilha(s3, valor);
 	}
 
-	// Pegamos os dados na ordem correta que est�o dentro da pilha s3 e colocamos em s
-	// Assim, s ter� os seus valores iniciais na ordem inversa
+	// Pegamos os dados na ordem correta que estão dentro da pilha s3 e colocamos em s
+	// Assim, s terá os seus valores iniciais na ordem inversa
 	while (!pilhaVazia(s3)) {
 		char valor = desempilha(s3);
 		empilha(s, valor);
@@ -122,7 +121,7 @@ int tamanhoPilha(Pilha *s) {
 	return tamanho;
 }
 
-// Pega o char que cont�m o maior valor ASCII da nossa pilha
+// Pega o char que contém o maior valor ASCII da nossa pilha
 char maiorValorASCII(Pilha *s) {
 	char maiorValorASCII = 0;
 
@@ -156,8 +155,8 @@ char maiorValorASCII(Pilha *s) {
 //Retorna o elemento do topo sem remove-lo da pilha
 char consultarTopo(Pilha * s) {
 	char valor = desempilha(s);
-	// Se a nossa pilha estiver vazia, ent�o receberemos NULL na hora de desempilhar e portanto, eu
-	// N�O posso setar NULL dentro da pilha, pois ela n�o tinha esse valor
+	// Se a nossa pilha estiver vazia, então receberemos NULL na hora de desempilhar e portanto, eu
+	// NÃO posso setar NULL dentro da pilha, pois ela não tinha esse valor
 	if (valor != '\0') {
 	    empilha(s, valor);
 	}
@@ -165,15 +164,15 @@ char consultarTopo(Pilha * s) {
 }
 
 // Funciona da seguinte forma:
-// Temos uma pilha auxiliar e uma vari�vel 'k' que serve para fazer a troca de elementos entre as pilhas.
+// Temos uma pilha auxiliar e uma variável 'k' que serve para fazer a troca de elementos entre as pilhas.
 // Primeiro eu pego o elemento da primeira pilha e coloco em 'k'.
-// Se tiver elemento menor que 'k' dentro da pilha 2 (s2), ent�o eu tiro esses elementos da pilha 2 e coloco
+// Se tiver elemento menor que 'k' dentro da pilha 2 (s2), então eu tiro esses elementos da pilha 2 e coloco
 // na pilha 1 (s)
-// Depois, eu coloco 'k' dentro da pilha 2 caso n�o tenha mais nenhum valor menor que 'k' dentro da pilha 2.
-// Repito o processo at� que a pilha 1 seja vazia
-// Se tivermos os seguintes valores dentro da pilha 1: ['F', 'B', 'A', 'G'], ent�o a pilha 2 ter� o
-// seguinte conjunto de n�meros: ['G', 'F', 'B', 'A']
-// Logo, a �nica coisa que resta fazer � desempilhar da pilha 2 e empilhar na pilha 1
+// Depois, eu coloco 'k' dentro da pilha 2 caso não tenha mais nenhum valor menor que 'k' dentro da pilha 2.
+// Repito o processo até que a pilha 1 seja vazia
+// Se tivermos os seguintes valores dentro da pilha 1: ['F', 'B', 'A', 'G'], então a pilha 2 terá o
+// seguinte conjunto de números: ['G', 'F', 'B', 'A']
+// Logo, a única coisa que resta fazer é desempilhar da pilha 2 e empilhar na pilha 1
 // 1 retorna a lista na ordem crescente e 0 retorna na ordem decrescente
 void ordenar(Pilha *s, int crescente) {
 	Pilha *s2;
@@ -191,18 +190,18 @@ void ordenar(Pilha *s, int crescente) {
 		    while (topoS2 < k && !pilhaVazia(s2)) { // Pode colocar && topoS2 != NULL
 		        char valorTopoS2 = desempilha(s2);
 		        empilha(s, valorTopoS2);
-		        topoS2 = consultarTopo(s2); // receber� NULL se a pilha for vazia
+		        topoS2 = consultarTopo(s2); // receberá NULL se a pilha for vazia
 		    }
 		    empilha(s2, k);
 		}
 	}
 
-	// Se for para retornar na ordem decrescente, ent�o inverteremos a pilha 2
+	// Se for para retornar na ordem decrescente, então inverteremos a pilha 2
 	if (!crescente) {
 	    inverterPilha(s2);
 	}
 
-    // Aqui n�s j� teremos o valor da pilha ordenada, agora basta desempilhar de 's2' e empilhar em 's'
+    // Aqui nós já teremos o valor da pilha ordenada, agora basta desempilhar de 's2' e empilhar em 's'
     while (!pilhaVazia(s2)) {
         char valor = desempilha(s2);
         empilha(s, valor);
@@ -241,7 +240,7 @@ int verificarPilhasIguais(Pilha *s, Pilha *s2) {
     }
 
     // Depois que desempilhamos das pilhas,
-    // para realizar a verifica��o,
+    // para realizar a verificação,
     // precisamos empilhar novamente
 
     while (!pilhaVazia(aux1)) {
