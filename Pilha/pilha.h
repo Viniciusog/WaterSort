@@ -1,5 +1,3 @@
-// Feito por: Vin�cius de Oliveira Guimar�es
-
 typedef struct pilha Pilha;
 
 Pilha *criaPilha();
@@ -9,7 +7,7 @@ int pilhaVazia(Pilha *s);
 int pilhaCheia(Pilha *s);
 Pilha *liberaPilha(Pilha *s);
 
-// Fun��es n�o primitivas
+// Funções não primitivas
 void inverterPilha(Pilha *s);
 void imprimePilha(Pilha *s);
 int tamanhoPilha(Pilha *s);
