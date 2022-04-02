@@ -56,5 +56,5 @@ bool pilha::peek(int * auxSaida){
 
 //função de retornar o índice
 int pilha::getTopo(){
-    return topo;
+    return topo -1;
 }

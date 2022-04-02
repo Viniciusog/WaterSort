@@ -34,7 +34,7 @@ bool vidro::verificaConcluida(){
     int auxSaida1, auxSaida2;
     
     //caso esteja vazia, nao está concluida
-    if(vazia())
+    if(!cheia())
         concluido = false;
     else
         concluido = true;
@@ -54,6 +54,7 @@ bool vidro::verificaConcluida(){
         pilhaAux.pop(&auxSaida1);
         push(auxSaida1);
     }
+
     return concluido;
 }
 
@@ -64,15 +65,25 @@ bool vidro::getConcluida(){//ok
 
 //passa o liquido do vidro atual para o vidro recebido como parâmetro
 bool vidro::passarLiquido(vidro& vidroReceptor){
-    int auxSaida;
     //se o vidro receptor estiver cheio ou o vidro doador estiverem vazios não é possível transferir
+    
+    int aux1, aux2;
+    vidroReceptor.peek(&aux1);
+    peek(&aux2);
+    if(aux1 != aux2)//verificando se o liquido que vai ser passado é igual ao do topo do que está recebendo
+        return false;
+
+    
+
     if(!vidroReceptor.cheia() && !vazia()){
+
+        int auxSaida;
         pop(&auxSaida);//desempilha do doador
         vidroReceptor.push(auxSaida);//empilha no receptor
         vidroReceptor.verificaConcluida();//verifica se esta concluida
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 
