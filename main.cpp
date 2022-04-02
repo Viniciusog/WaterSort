@@ -2,6 +2,9 @@
 //alguma coisa
 int main()
 {
+
+    //  arquivo modificado
+    
     sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
 
     //quinta pilha
