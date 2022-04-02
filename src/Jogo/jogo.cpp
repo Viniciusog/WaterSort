@@ -10,7 +10,7 @@ using namespace std;
 jogo::jogo(){
     //setando aos vidros como iguais para teste 
     
-    for(int i = 0; i < 1; i++){//todos tem 3 "0s", precisam de 4
+    for(int i = 0; i < 2; i++){//todos tem 3 "0s", precisam de 4
         conjunto[0].push(1);
         conjunto[1].push(2);
         conjunto[2].push(1);
