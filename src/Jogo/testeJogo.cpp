@@ -5,7 +5,8 @@ using namespace std;
 
 int main(){
     jogo teste;
-    teste.input();
+    teste.iniciaJogo();
+
 
     system("pause");
 }
