@@ -37,9 +37,9 @@ bool jogo::iniciaJogo(){
 bool jogo::fimDoJogo(){
     for (int i = 0; i < 4; i++){//caso todas pilhas estejam concluidas da como fim de jogo
         if(!conjunto[i].verificaConcluida())
-            return true;
+            return false;
     }
-    return false;
+    return true;
 }
 
 //seta qual a jogada
