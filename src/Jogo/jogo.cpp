@@ -12,11 +12,11 @@ jogo::jogo(){
     
     for(int i = 0; i < 3; i++){//todos tem 3 "0s", precisam de 4
         conjunto[0].push(1);
-        conjunto[1].push(1);
+        conjunto[1].push(2);
         conjunto[2].push(1);
         //potes livres
         conjunto[3].push(1);
-        conjunto[4].push(1);
+        conjunto[4].push(2);
     }
 
     //setando a matriz de cores pela primeira vez
@@ -27,19 +27,19 @@ jogo::jogo(){
     }
     
     //atualizando de acordo com as mudancas 
-    atualizaMatrizCores();
-    desenha();
+    
 }
 
 jogo::~jogo(){}//nao tem função por hora
 
 bool jogo::iniciaJogo(){
         while(!fimDoJogo()){//enquanto nao acontecer o final do jogo, fica recebendo inputs e fazendo as jogadas
-        input();
-        cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
+            atualizaMatrizCores();
+            desenha();
+            input();
+            cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
         //atualizando de acordo com as mudancas 
-        atualizaMatrizCores();
-        desenha();
+        
     }
     cout<<"parabens, voce ganhou o jogo!"<<endl;
     return true;
@@ -83,20 +83,21 @@ void jogo::atualizaMatrizCores(){//as cores podem ser = 0
     //desempilhand, lendo e guardando os valores das cores
     for (int i = 0; i < 5; i++){
         int j = 0;
-        while(!conjunto[i].vazia()){
-            conjunto[i].pop(&matrizDeCores[i][3-j]);//sendo printados com j(altura) invertidos, pois a ordem de retirada e de baixo pra cima
-            vetorPilhasAux->push(matrizDeCores[i][3-j]);//empilhando na pilha aux
-            j++;
+        for (int j = 0; j < 4; j++){
+            if(!conjunto[i].vazia()){
+                conjunto[i].pop(&matrizDeCores[i][3-j]);//sendo printados com j(altura) invertidos, pois a ordem de retirada e de baixo pra cima
+                vetorPilhasAux[i].push(matrizDeCores[i][3-j]);//empilhando na pilha aux
+            }else
+                matrizDeCores[i][3-j] = 0;
+            
         }
     }
 
     //empilhando novamente e anotando os valores
     for (int i = 0; i < 5; i++){
-        int j = 0;
         while(!vetorPilhasAux[i].vazia()){
             vetorPilhasAux[i].pop(&auxSaida);//passa para a matriz de linha(vidro) i, coluna(nivel j)
             conjunto[i].push(auxSaida);//reempilhando na pilha original 
-            j++;
         }
     }
 }
