@@ -66,15 +66,15 @@ bool vidro::getConcluida(){//ok
 //passa o liquido do vidro atual para o vidro recebido como parâmetro
 bool vidro::passarLiquido(vidro& vidroReceptor){
     //se o vidro receptor estiver cheio ou o vidro doador estiverem vazios não é possível transferir
-    
-    int aux1, aux2;
-    vidroReceptor.peek(&aux1);
-    peek(&aux2);
-    if(aux1 != aux2)//verificando se o liquido que vai ser passado é igual ao do topo do que está recebendo
-        return false;
+    if(!vidroReceptor.vazia()){
+        int aux1, aux2;
+        vidroReceptor.peek(&aux1);
+        peek(&aux2);
+        if(aux1 != aux2)//verificando se o liquido que vai ser passado é igual ao do topo do que está recebendo
+            return false;
 
+    }
     
-
     if(!vidroReceptor.cheia() && !vazia()){
 
         int auxSaida;
