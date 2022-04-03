@@ -6,11 +6,12 @@ Programa : implementação da classe vidro do jogo water sort
 //inclusao das bibliotecas
 #include <iostream>
 #include "vidro.h"
+#include <SFML/Graphics.hpp>
 //namespace
 using namespace std;
 
 //construtor de vidro, seta que nao foi concluido, ou seja, nao tem todas as cores iguais
-vidro::vidro(){
+vidro::vidro() {
     concluido = false;
 }
 
@@ -20,7 +21,7 @@ vidro::~vidro(){}
 /*PRECISA MELHORAR*/
 //permite que se sete o vidro a partir de uma pilha
 bool vidro::setVidro(pilha& pilhaAux){//seta o vidro de acordo com a pilha passada
-    int aux;
+    sf::Color aux;
     while(!pilhaAux.vazia()){
         pilhaAux.pop(&aux);
         push(aux);
@@ -31,7 +32,7 @@ bool vidro::setVidro(pilha& pilhaAux){//seta o vidro de acordo com a pilha passa
 bool vidro::verificaConcluida(){
     //declarações locais
     pilha pilhaAux;
-    int auxSaida1, auxSaida2;
+    sf::Color auxSaida1, auxSaida2;
     
     //caso esteja vazia, nao está concluida
     if(!cheia())
@@ -63,21 +64,27 @@ bool vidro::getConcluida(){//ok
     return concluido;
 }
 
+bool vidro::coresSaoIguais(sf::Color &cor1, sf::Color &cor2) {
+    if (cor1.r == cor2.r && cor1.g == cor2.g && cor1.g == cor2.g) {
+        return true;
+    }
+    return false;
+}
+
 //passa o liquido do vidro atual para o vidro recebido como parâmetro
 bool vidro::passarLiquido(vidro& vidroReceptor){
     //se o vidro receptor estiver cheio ou o vidro doador estiverem vazios não é possível transferir
     if(!vidroReceptor.vazia()){
-        int aux1, aux2;
+        sf::Color aux1, aux2;
         vidroReceptor.peek(&aux1);
         peek(&aux2);
-        if(aux1 != aux2)//verificando se o liquido que vai ser passado é igual ao do topo do que está recebendo
+        if(!coresSaoIguais(aux1, aux2)) //verificando se o liquido que vai ser passado é igual ao do topo do que está recebendo
             return false;
-
     }
     
     if(!vidroReceptor.cheia() && !vazia()){
 
-        int auxSaida;
+        sf::Color auxSaida;
         pop(&auxSaida);//desempilha do doador
         vidroReceptor.push(auxSaida);//empilha no receptor
         vidroReceptor.verificaConcluida();//verifica se esta concluida

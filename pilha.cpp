@@ -6,6 +6,8 @@ Programa : Implementação de uma TAD pilha
 //bibliotecas
 #include <iostream>
 #include "pilha.h"
+#include <SFML/Graphics.hpp>
+
 //namespace
 using namespace std;
 
@@ -28,7 +30,7 @@ bool pilha::cheia(){
 }
 
 //função de empilhar
-bool pilha::push(int novoElemento){
+bool pilha::push(sf::Color novoElemento){
     if(!cheia()){
         vetor[topo++] = novoElemento;
         return true;
@@ -37,7 +39,7 @@ bool pilha::push(int novoElemento){
 }
 
 //função de desempilhar
-bool pilha::pop(int * auxSaida){
+bool pilha::pop(sf::Color * auxSaida){
     if(!vazia()){
         *auxSaida = vetor[--topo];
         return true;
@@ -46,7 +48,7 @@ bool pilha::pop(int * auxSaida){
 }
 
 //função de espiar o topo
-bool pilha::peek(int * auxSaida){
+bool pilha::peek(sf::Color * auxSaida){
     if(!vazia()){
         *auxSaida = vetor[topo-1];
         return true;

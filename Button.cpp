@@ -11,7 +11,6 @@ Button::~Button() {
 
 }
 
-
 Button::Button(string text, sf::Vector2f size, int charSize, sf::Color bgColor, sf::Color textColor) {
     this->text.setString(text);
     this->text.setColor(textColor);
