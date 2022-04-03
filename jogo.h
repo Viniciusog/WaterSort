@@ -14,12 +14,12 @@ class jogo{
         void atualizaMatrizCores();//desenha os quadrados na tela
         void input();//recebe do jogador qual é a próxima jogada
         void desenha();
-
+        bool fimDoJogo();//define quando o jogo chegou ao fim, ou seja, foi concluido
+        
         /*passar para private*/
         vidro conjunto[5];
     private:
         
-        bool fimDoJogo();//define quando o jogo chegou ao fim, ou seja, foi concluido
         bool embaralha();//ainda nao feito
         int matrizDeCores[5][4];//
         

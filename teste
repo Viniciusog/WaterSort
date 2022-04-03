@@ -5,10 +5,6 @@ using namespace std;
 #include "Button.h"
 #include <string>
 
-void increment(int &qtd) {
-    qtd++;
-    cout << "QTD: " << qtd << endl;
-}
 //alguma coisa
 int main()
 {
@@ -22,32 +18,23 @@ int main()
     sf::Font font;
     font.loadFromFile("Roboto-Medium.ttf");
 
-    Button* buttons[5];
+    Button b1("1", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
+    Button b2("2", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
+    Button b3("3", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
+    Button b4("4", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
+    Button b5("5", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
 
-    Button b0("1", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-    Button b1("2", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-    Button b2("3", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-    Button b3("4", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-    Button b4("5", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-
-    b0.setFont(font);
     b1.setFont(font);
     b2.setFont(font);
     b3.setFont(font);
     b4.setFont(font);
+    b5.setFont(font);
 
-    b0.setPosition({10, 10});
-    b1.setPosition({70, 10});
-    b2.setPosition({130, 10});
-    b3.setPosition({190, 10});
-    b4.setPosition({250, 10});
-
-    buttons[0] = &b0;
-    buttons[1] = &b1;
-    buttons[2] = &b2;
-    buttons[3] = &b3;
-    buttons[4] = &b4;
-
+    b1.setPosition({10, 10});
+    b2.setPosition({70, 10});
+    b3.setPosition({130, 10});
+    b4.setPosition({190, 10});
+    b5.setPosition({250, 10});
 
     j.atualizaMatrizCores();
 
@@ -170,21 +157,137 @@ int main()
     sf::RectangleShape shape11(sf::Vector2f(50.f, 50.f));
     shape11.setFillColor(sf::Color(255, 102, 102));
     shape11.setPosition(50.f,700.f);
+    
+    int limpar = 0;
+    int var1 = 0;
+    int var2 = 0;
+    int var3 = 0;
 
-    int from = -1;
-    int to = -1;
+    int array[2];
+    array[0] = -1;
+    array[1] = -1;
+
         
     while (window.isOpen())
     {
-
         sf::Event event;
 
-        /* if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            // Se estiver vazio
+            if(b1.isMouseOver(window)) {
+                b1.setBackgroundColor(sf::Color::Green);
+
+                if (array[0] == -1 && array[1] == 1) {
+
+                }
+                
+                switch (origemEDestino) {
+                    case 0:
+                        array[0] = 1;
+                        origemEDestino = 1;
+                        break;
+                    case 1:
+                        array[1] = 1;
+                        origemEDestino = 2;
+                        break;
+                    case 2:
+                        array[0] = 1;
+                        array[1] = -1;
+                        origemEDestino = 1;
+                        break;  
+                    default:
+                        break;
+                }   
+            }
+            if(b2.isMouseOver(window)) {
+                b2.setBackgroundColor(sf::Color::Green);
+                switch (origemEDestino) {
+                    case 0:
+                        array[0] = 2;
+                        origemEDestino = 1;
+                        break;
+                    case 1:
+                        array[1] = 2;
+                        origemEDestino = 2;
+                        break;
+                    case 2:
+                        array[0] = 2;
+                        array[1] = -1;
+                        origemEDestino = 1;
+                        break;  
+                    default:
+                        break;
+                }   
+            }
+            if(b3.isMouseOver(window)) {
+                b3.setBackgroundColor(sf::Color::Green);
+                switch (origemEDestino) {
+                    case 0:
+                        array[0] = 3;
+                        origemEDestino = 1;
+                        break;
+                    case 1:
+                        array[1] = 3;
+                        origemEDestino = 2;
+                        break;
+                    case 2:
+                        array[0] = 3;
+                        array[1] = -1;
+                        origemEDestino = 1;
+                        break;  
+                    default:
+                        break;
+                }   
+            }
+            if(b4.isMouseOver(window)) {
+                b4.setBackgroundColor(sf::Color::Green);
+                switch (origemEDestino) {
+                    case 0:
+                        array[0] = 4;
+                        origemEDestino = 1;
+                        break;
+                    case 1:
+                        array[1] = 4;
+                        origemEDestino = 2;
+                        break;
+                    case 2:
+                        array[0] = 4;
+                        array[1] = -1;
+                        origemEDestino = 1;
+                        break;  
+                    default:
+                        break;
+                } 
+            }
+            if(b5.isMouseOver(window)) {
+                b5.setBackgroundColor(sf::Color::Green);
+                switch (origemEDestino) {
+                    case 0:
+                        array[0] = 5;
+                        origemEDestino = 1;
+                        break;
+                    case 1:
+                        array[1] = 5;
+                        origemEDestino = 2;
+                        break;
+                    case 2:
+                        array[0] = 5;
+                        array[1] = -1;
+                        origemEDestino = 1;
+                        break;  
+                    default:
+                        break;
+                } 
+            }
+            cout << "Array: [" << array[0] << ", " << array[1] << "]" << endl;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
             b1.setBackgroundColor(sf::Color::Green);
         } 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
             b2.setBackgroundColor(sf::Color::Magenta);
-        }  */
+        } 
         
         while (window.pollEvent(event))
         {
@@ -192,32 +295,25 @@ int main()
                 case sf::Event::Closed:
                     window.close();
                     break;
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                        for (int i = 0; i < 5; i++) {
-                            if (buttons[i]->isMouseOver(window)) {      
-                                if(from == -1) {
-                                    from = i;
-                                } else if(to == -1) {
-                                    to = i;
-                                } else {
-                                    buttons[from]->setActive(false);
-                                    buttons[to]->setActive(false);
-                                    from = i;
-                                    to = -1;
-                                }
-                                buttons[i]->setActive(true);
-                            }
-                        } 
-                        cout << "From: " << from << ", to: " << to << endl;
-                    } 
-                break;
-            }           
+                case sf::Event::MouseButtonPressed
+                    switch (sf::Mouse::isMo)
+                    {
+                    case /* constant-expression */:
+                        /* code */
+                        break;
+                    
+                    default:
+                        break;
+                    }
+            }         
         }
    
-        for (int i = 0; i < 5; i++) {
-            buttons[i]->drawTo(window);
-        }
+        b1.drawTo(window);
+        b2.drawTo(window);
+        b3.drawTo(window);
+        b4.drawTo(window);
+        b5.drawTo(window);
+
 
         //j.input();
         //primeira pilha

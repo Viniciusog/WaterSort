@@ -33,13 +33,12 @@ jogo::jogo(){
 jogo::~jogo(){}//nao tem função por hora
 
 bool jogo::iniciaJogo(){
-        while(!fimDoJogo()){//enquanto nao acontecer o final do jogo, fica recebendo inputs e fazendo as jogadas
-            atualizaMatrizCores();
-            desenha();
-            input();
-            cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
-        //atualizando de acordo com as mudancas 
-        
+    while(!fimDoJogo()){//enquanto nao acontecer o final do jogo, fica recebendo inputs e fazendo as jogadas
+        atualizaMatrizCores();
+        desenha();
+        input();
+        cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
+        //atualizando de acordo com as mudancas     
     }
     cout<<"parabens, voce ganhou o jogo!"<<endl;
     return true;
@@ -74,6 +73,8 @@ void jogo::input(){
         }while(aux < 0 || aux > 4);
 
     j.setReceptor(aux);//definindo o receptor
+
+     cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
 }
 
 //desenha os vidros
