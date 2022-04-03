@@ -18,6 +18,7 @@ Button::Button(string text, sf::Vector2f size, int charSize, sf::Color bgColor, 
     this->button.setSize(size);
     this->button.setFillColor(bgColor);
     this->bgColor = bgColor;
+    this->defaultBgColor = bgColor;
     this->active = false;
 }
 
@@ -25,9 +26,12 @@ void Button::setFont(sf::Font &font) {
     this->text.setFont(font);
 }
 
+void Button::setDefaultBackgroundColor(sf::Color color) {
+    this->defaultBgColor = color;
+}
+
 void Button::setBackgroundColor(sf::Color color) {
     this->bgColor = color;
-    this->button.setFillColor(color);
 }
 
 void Button::setTextColor(sf::Color color) {
@@ -50,9 +54,9 @@ void Button::setPosition(sf::Vector2f pos) {
 
 void Button::drawTo(sf::RenderWindow &window) {
     if(active) {
-        this->button.setFillColor(sf::Color::Green);
-    } else {
         this->button.setFillColor(this->bgColor);
+    } else {
+        this->button.setFillColor(this->defaultBgColor);
     }
     window.draw(button);
     window.draw(text);

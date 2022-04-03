@@ -19,6 +19,7 @@ class pilha{
         bool vazia();//retorna se a pilha está vazia
         bool cheia();//retorna se a pilha está cheia
         int getTopo();//retorna onde está o indicador de topo
+        sf::Color getColorAtPosition(int position);
     private:
         sf::Color vetor[4];
         int topo;

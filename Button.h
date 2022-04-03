@@ -10,6 +10,7 @@ class Button {
         ~Button();
         void setFont(sf::Font &fonte);
         void setText(string text);
+        void setDefaultBackgroundColor(sf::Color cor);
         void setBackgroundColor(sf::Color cor);
         void setTextColor(sf::Color cor);
         void setPosition(sf::Vector2f pos);
@@ -21,5 +22,6 @@ class Button {
         sf::RectangleShape button;
         sf::Text text;
         sf::Color bgColor;
+        sf::Color defaultBgColor;
         bool active;
 };

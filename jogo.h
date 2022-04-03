@@ -18,7 +18,8 @@ class jogo{
         void desenha(Glass* &glasses);
         bool fimDoJogo();//define quando o jogo chegou ao fim, ou seja, foi concluido
         sf::Color getCorMatriz(int conjunto, int elemento);
-        /*passar para private*/
+        sf::Color getCorDePote(int numConjunto, int elemento);
+                /*passar para private*/
         vidro conjunto[5];
     private:
         

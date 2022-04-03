@@ -36,14 +36,11 @@ jogo::jogo(){
     conjunto[3].push(azul);
 
     //setando a matriz de cores pela primeira vez
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++) {
         for(int j = 0; j < 4; j++) {
             matrizDeCores[i][j] = sf::Color(0, 0, 0);
         }
-    }
-    
-    //atualizando de acordo com as mudancas 
-    
+    }    
 }
 
 jogo::~jogo(){}//nao tem função por hora
@@ -61,15 +58,16 @@ bool jogo::iniciaJogo(){
 }
 
 bool jogo::fimDoJogo(){
-    for (int i = 0; i < 3; i++){//caso todas pilhas estejam concluidas da como fim de jogo
-        if(!conjunto[i].verificaConcluida())
-            return false;
+    int qtdSucesso = 0;
+    for (int i = 0; i < 5; i++){//caso todas pilhas estejam concluidas da como fim de jogo
+        if(conjunto[i].verificaConcluida())
+            qtdSucesso++;
     }
-    return true;
+    return qtdSucesso == 4;
 }
 
 //seta qual a jogada
-void jogo::input(){
+void jogo::input() {
     int aux;
     cout<<"Digite qual vidro voce quer retirar: "<<endl;
     cin>>aux;
@@ -90,7 +88,20 @@ void jogo::input(){
 
     j.setReceptor(aux);//definindo o receptor
 
-     cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
+    cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
+}
+
+sf::Color jogo::getCorDePote(int numConjunto, int elemento) {
+    if (numConjunto > 4) {
+        cout << "NÃO EXISTE O POTE COM O NÚMERO: " << numConjunto << endl;
+    }
+
+    // Se estamos pegando de uma posição que tem cor, então retorna a cor. Se não, retorna preto
+    if (elemento < conjunto[numConjunto].getTopo()) {
+        return conjunto[numConjunto].getColorAtPosition(elemento);
+    } else {
+        return sf::Color::Black;
+    }
 }
 
 //desenha os vidros
@@ -98,15 +109,14 @@ void jogo::atualizaMatrizCores(){//as cores podem ser = 0
     pilha vetorPilhasAux[5];//guarda os elementos tirados da 
     sf::Color auxSaida;
     //desempilhand, lendo e guardando os valores das cores
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++) {
         int j = 0;
-        for (int j = 0; j < 4; j++){
+        for (int j = 0; j < 4; j++) {
             if(!conjunto[i].vazia()){
                 conjunto[i].pop(&matrizDeCores[i][3-j]);//sendo printados com j(altura) invertidos, pois a ordem de retirada e de baixo pra cima
                 vetorPilhasAux[i].push(matrizDeCores[i][3-j]);//empilhando na pilha aux
             } else
                 matrizDeCores[i][3-j] = sf::Color(0, 0, 0);
-            
         }
     }
 

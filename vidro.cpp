@@ -29,7 +29,7 @@ bool vidro::setVidro(pilha& pilhaAux){//seta o vidro de acordo com a pilha passa
 }
 
 //verifica se todos os elementos do vidro tem a mesma cor
-bool vidro::verificaConcluida(){
+bool vidro::verificaConcluida() {
     //declarações locais
     pilha pilhaAux;
     sf::Color auxSaida1, auxSaida2;
@@ -72,7 +72,7 @@ bool vidro::coresSaoIguais(sf::Color &cor1, sf::Color &cor2) {
 }
 
 //passa o liquido do vidro atual para o vidro recebido como parâmetro
-bool vidro::passarLiquido(vidro& vidroReceptor){
+bool vidro::passarLiquido(vidro& vidroReceptor) {
     //se o vidro receptor estiver cheio ou o vidro doador estiverem vazios não é possível transferir
     if(!vidroReceptor.vazia()){
         sf::Color aux1, aux2;
@@ -83,7 +83,6 @@ bool vidro::passarLiquido(vidro& vidroReceptor){
     }
     
     if(!vidroReceptor.cheia() && !vazia()){
-
         sf::Color auxSaida;
         pop(&auxSaida);//desempilha do doador
         vidroReceptor.push(auxSaida);//empilha no receptor

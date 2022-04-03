@@ -89,15 +89,20 @@ int main()
                             if (buttons[i]->isMouseOver(window)) {      
                                 if(from == -1) {
                                     from = i;
+                                    buttons[from]->setBackgroundColor(sf::Color::Green);
                                 } else if(to == -1) {
                                     to = i;
                                     // fazer a mudança de cores
-                                    objJogo.conjunto[from].passarLiquido(objJogo.conjunto[to]);
-                                    objJogo.atualizaMatrizCores();
+                                    buttons[to]->setBackgroundColor(sf::Color::Magenta);
+                                    bool ok = objJogo.conjunto[from].passarLiquido(objJogo.conjunto[to]);
+                                    bool fim = objJogo.fimDoJogo();
+                                    cout << "ok? " << ok << endl;
+                                    cout << "fim? " << fim << endl;
                                 } else {
                                     buttons[from]->setActive(false);
                                     buttons[to]->setActive(false);
                                     from = i;
+                                    buttons[from]->setBackgroundColor(sf::Color::Green);
                                     to = -1;
                                 }
                                 buttons[i]->setActive(true);
@@ -122,19 +127,19 @@ int main()
         line11.setPosition(49.f,530.f);
 
         sf::RectangleShape shape14(sf::Vector2f(50.f, 50.f));
-        shape14.setFillColor(objJogo.getCorMatriz(0, 3));
+        shape14.setFillColor(objJogo.getCorDePote(0, 3));
         shape14.setPosition(50.f,550.f);
 
         sf::RectangleShape shape13(sf::Vector2f(50.f, 50.f));
-        shape13.setFillColor(objJogo.getCorMatriz(0, 2));
+        shape13.setFillColor(objJogo.getCorDePote(0, 2));
         shape13.setPosition(50.f,600.f);
 
         sf::RectangleShape shape12(sf::Vector2f(50.f, 50.f));
-        shape12.setFillColor(objJogo.getCorMatriz(0, 1));
+        shape12.setFillColor(objJogo.getCorDePote(0, 1));
         shape12.setPosition(50.f,650.f);
 
         sf::RectangleShape shape11(sf::Vector2f(50.f, 50.f));
-        shape11.setFillColor(objJogo.getCorMatriz(0, 0));
+        shape11.setFillColor(objJogo.getCorDePote(0, 0));
         shape11.setPosition(50.f,700.f);
 
         //segunda pilha
@@ -146,19 +151,19 @@ int main()
         line21.setPosition(149.f,530.f);
 
         sf::RectangleShape shape24(sf::Vector2f(50.f, 50.f));
-        shape24.setFillColor(objJogo.getCorMatriz(1, 3));
+        shape24.setFillColor(objJogo.getCorDePote(1, 3));
         shape24.setPosition(150.f,550.f);
 
         sf::RectangleShape shape23(sf::Vector2f(50.f, 50.f));
-        shape23.setFillColor(objJogo.getCorMatriz(1, 2) );
+        shape23.setFillColor(objJogo.getCorDePote(1, 2) );
         shape23.setPosition(150.f,600.f);
 
         sf::RectangleShape shape22(sf::Vector2f(50.f, 50.f));
-        shape22.setFillColor(objJogo.getCorMatriz(1, 1));
+        shape22.setFillColor(objJogo.getCorDePote(1, 1));
         shape22.setPosition(150.f,650.f);
 
         sf::RectangleShape shape21(sf::Vector2f(50.f, 50.f));
-        shape21.setFillColor(objJogo.getCorMatriz(1, 0));
+        shape21.setFillColor(objJogo.getCorDePote(1, 0));
         shape21.setPosition(150.f,700.f);
 
         //terceira pilha
@@ -170,19 +175,19 @@ int main()
         line31.setPosition(249.f,530.f);
 
         sf::RectangleShape shape34(sf::Vector2f(50.f, 50.f));
-        shape34.setFillColor(objJogo.getCorMatriz(2, 3));
+        shape34.setFillColor(objJogo.getCorDePote(2, 3));
         shape34.setPosition(250.f,550.f);
 
         sf::RectangleShape shape33(sf::Vector2f(50.f, 50.f));
-        shape33.setFillColor(objJogo.getCorMatriz(2, 2));
+        shape33.setFillColor(objJogo.getCorDePote(2, 2));
         shape33.setPosition(250.f,600.f);
 
         sf::RectangleShape shape32(sf::Vector2f(50.f, 50.f));
-        shape32.setFillColor(objJogo.getCorMatriz(2, 1));
+        shape32.setFillColor(objJogo.getCorDePote(2, 1));
         shape32.setPosition(250.f,650.f);
 
         sf::RectangleShape shape31(sf::Vector2f(50.f, 50.f));
-        shape31.setFillColor(objJogo.getCorMatriz(2, 0));
+        shape31.setFillColor(objJogo.getCorDePote(2, 0));
         shape31.setPosition(250.f,700.f);
 
         //quarta pilha
@@ -194,19 +199,19 @@ int main()
         line41.setPosition(349.f,530.f);
 
         sf::RectangleShape shape44(sf::Vector2f(50.f, 50.f));
-        shape44.setFillColor(objJogo.getCorMatriz(3, 3));
+        shape44.setFillColor(objJogo.getCorDePote(3, 3));
         shape44.setPosition(350.f,550.f);
 
         sf::RectangleShape shape43(sf::Vector2f(50.f, 50.f));
-        shape43.setFillColor(objJogo.getCorMatriz(3, 2));
+        shape43.setFillColor(objJogo.getCorDePote(3, 2));
         shape43.setPosition(350.f,600.f);
 
         sf::RectangleShape shape42(sf::Vector2f(50.f, 50.f));
-        shape42.setFillColor(objJogo.getCorMatriz(3, 1));
+        shape42.setFillColor(objJogo.getCorDePote(3, 1));
         shape42.setPosition(350.f,650.f);
 
         sf::RectangleShape shape41(sf::Vector2f(50.f, 50.f));
-        shape41.setFillColor(objJogo.getCorMatriz(3, 0));
+        shape41.setFillColor(objJogo.getCorDePote(3, 0));
         shape41.setPosition(350.f,700.f);
 
         //quinta pilha
@@ -218,19 +223,19 @@ int main()
         line51.setPosition(449.f,530.f);
 
         sf::RectangleShape shape54(sf::Vector2f(50.f, 50.f));
-        shape54.setFillColor(objJogo.getCorMatriz(4, 3));
+        shape54.setFillColor(objJogo.getCorDePote(4, 3));
         shape54.setPosition(450.f,550.f);
 
         sf::RectangleShape shape53(sf::Vector2f(50.f, 50.f));
-        shape53.setFillColor(objJogo.getCorMatriz(4, 2));
+        shape53.setFillColor(objJogo.getCorDePote(4, 2));
         shape53.setPosition(450.f,600.f);
 
         sf::RectangleShape shape52(sf::Vector2f(50.f, 50.f));
-        shape52.setFillColor(objJogo.getCorMatriz(4, 1));
+        shape52.setFillColor(objJogo.getCorDePote(4, 1));
         shape52.setPosition(450.f,650.f);
 
         sf::RectangleShape shape51(sf::Vector2f(50.f, 50.f));
-        shape51.setFillColor(objJogo.getCorMatriz(4, 0));
+        shape51.setFillColor(objJogo.getCorDePote(4, 0));
         shape51.setPosition(450.f,700.f);
 
         //j.input();

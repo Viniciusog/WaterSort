@@ -56,7 +56,11 @@ bool pilha::peek(sf::Color * auxSaida){
     return false;
 }
 
+sf::Color pilha::getColorAtPosition(int position) {
+    return vetor[position];
+}
+
 //função de retornar o índice
 int pilha::getTopo(){
-    return topo -1;
+    return topo;
 }
