@@ -1,6 +1,6 @@
 all: compile link
 
 compile:
-	g++ -Isrc/include -c main.cpp jogada.cpp jogo.cpp pilha.cpp jogada.cpp testeJogo.cpp vidro.cpp Button.cpp glass.cpp
+	g++ -Isrc/include -c Main.cpp Jogada.cpp Jogo.cpp Pilha.cpp Jogada.cpp  Vidro.cpp Button.cpp
 link:
-	g++ main.o jogada.o jogo.o pilha.o vidro.o button.o glass.o -o main -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system
+	g++ Main.o Jogada.o Jogo.o Pilha.o Vidro.o Button.o -o main -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system

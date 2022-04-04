@@ -1,36 +1,30 @@
-/*
-Autor : Augusto dos Santos Gomes Vaz
-Programa : Implementação de uma TAD pilha
+/**
+* @author Augusto dos Santos Gomes Vaz
+* Programa : Implementação de uma TAD Pilha
 */
-
-//bibliotecas
 #include <iostream>
-#include "pilha.h"
+#include "Pilha.h"
 #include <SFML/Graphics.hpp>
-
-//namespace
 using namespace std;
 
-//construtor da pilha
-pilha::pilha(){
+Pilha::Pilha(){
     topo = 0;
 }
 
-//destrutor da pilha
-pilha::~pilha(){}
+Pilha::~Pilha() {
+    
+}
 
-//teste de pilha vazia
-bool pilha::vazia(){
+bool Pilha::vazia(){
     return topo == 0;
 }
 
-//teste de pilha cheia
-bool pilha::cheia(){
+bool Pilha::cheia(){
     return topo == 4;
 }
 
-//função de empilhar
-bool pilha::push(sf::Color novoElemento){
+// Função de empilhar
+bool Pilha::push(sf::Color novoElemento){
     if(!cheia()){
         vetor[topo++] = novoElemento;
         return true;
@@ -38,8 +32,8 @@ bool pilha::push(sf::Color novoElemento){
     return false;
 }
 
-//função de desempilhar
-bool pilha::pop(sf::Color * auxSaida){
+// Função de desempilhar
+bool Pilha::pop(sf::Color * auxSaida){
     if(!vazia()){
         *auxSaida = vetor[--topo];
         return true;
@@ -47,8 +41,8 @@ bool pilha::pop(sf::Color * auxSaida){
     return false;
 }
 
-//função de espiar o topo
-bool pilha::peek(sf::Color * auxSaida){
+// Função de espiar o topo
+bool Pilha::peek(sf::Color * auxSaida){
     if(!vazia()){
         *auxSaida = vetor[topo-1];
         return true;
@@ -56,11 +50,11 @@ bool pilha::peek(sf::Color * auxSaida){
     return false;
 }
 
-sf::Color pilha::getColorAtPosition(int position) {
+sf::Color Pilha::getColorAtPosition(int position) {
     return vetor[position];
 }
 
 //função de retornar o índice
-int pilha::getTopo(){
+int Pilha::getTopo(){
     return topo;
 }

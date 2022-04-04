@@ -1,3 +1,7 @@
+/**
+ * @author Vinícius de Oliveira Guimarães
+ * Programa : Implementação da classe Button. Para ser utilizado na tela, com texto no centro.
+ */
 #include "Button.h"
 #include "string"
 using namespace std;
@@ -42,6 +46,7 @@ void Button::setText(string text) {
     this->text.setString(text);
 }
 
+//Configura a posição das coordenadas do botão e também do texto no centro do botão
 void Button::setPosition(sf::Vector2f pos) {
     this->button.setPosition(pos);
 
@@ -52,6 +57,7 @@ void Button::setPosition(sf::Vector2f pos) {
     this->text.setPosition({xPos, yPos});
 }
 
+//Desenha o botão dentro de uma tela recebida como parâmetro
 void Button::drawTo(sf::RenderWindow &window) {
     if(active) {
         this->button.setFillColor(this->bgColor);
@@ -62,6 +68,7 @@ void Button::drawTo(sf::RenderWindow &window) {
     window.draw(text);
 }
 
+//Verifica se o mouse está em cima do botão
 bool Button::isMouseOver(sf::RenderWindow &window) {
     float mouseX = sf::Mouse::getPosition(window).x;
     float mouseY = sf::Mouse::getPosition(window).y;
@@ -71,11 +78,8 @@ bool Button::isMouseOver(sf::RenderWindow &window) {
 
     if (mouseX > btnX && mouseX < (btnX + this->button.getLocalBounds().width)
         && mouseY > btnY && mouseY < (btnY + this->button.getLocalBounds().width)) {
-            cout << "clique no botão" << endl;
         return true;
     }
-
-    cout << "clique fora do botão" << endl;
 
     return false;
 }

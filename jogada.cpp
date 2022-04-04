@@ -1,29 +1,26 @@
-/*
-Autor: Augusto dos Santos Gomes Vaz
-Programa : implementação da classe jogada do jogo water sort
-*/
-//inclusao das bibliotecas
+/**
+ * @author Augusto dos Santos Gomes Vaz
+ * Programa: Implementação da classe Jogada do jogo water sort
+ */
+
 #include <iostream>
-#include "jogada.h"
-//namespace
+#include "Jogada.h"
 using namespace std;
 
-//define qual vai ser o doador na jogada
-void jogada::setDoador(int vidroDoador){
+//Define qual vai ser o doador na jogada
+void Jogada::setDoador(int vidroDoador){
     this->vidroDoador = vidroDoador;
 }
 
-//define qual vai ser o receptor na jogada
-void jogada::setReceptor(int vidroReceptor){
+//Define qual vai ser o receptor na jogada
+void Jogada::setReceptor(int vidroReceptor){
     this->vidroReceptor = vidroReceptor;
 }
 
-//devolve o doador
-int jogada::getDoador(){
+int Jogada::getDoador(){
     return vidroDoador;
 }
 
-//devolve o receptor
-int jogada::getReceptor(){
+int Jogada::getReceptor(){
     return vidroReceptor;
 }

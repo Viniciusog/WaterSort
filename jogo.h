@@ -1,30 +1,31 @@
-/*
-Autor: Augusto dos Santos Gomes Vaz
-Programa : cabeçalho da implementação da classe jogável do jogo water sort
+/**
+* @author Augusto dos Santos Gomes Vaz
+* Programa: cabeçalho da implementação da classe jogável do jogo water sort
 */
-#include "vidro.h"
-#include "pilha.h"
-#include "jogada.h"
-#include "Glass.h"
+#ifndef JOGO_H
+#define JOGO_H
+
+#include "Vidro.h"
+#include "Pilha.h"
+#include "Jogada.h"
 #include <SFML/Graphics.hpp>
 
-class jogo{
+class Jogo {
     public:
-        jogo();//embaralha as cores entre os potes e deixa tudo pronto para começar
-        ~jogo();//sem muita função
-        void iniciaJogo();//inicia o jogo
-        void atualizaMatrizCores();//desenha os quadrados na tela
-        void input();//recebe do jogador qual é a próxima jogada
-        void desenha(Glass* &glasses);
-        bool fimDoJogo();//define quando o jogo chegou ao fim, ou seja, foi concluido
-        sf::Color getCorMatriz(int conjunto, int elemento);
-        sf::Color getCorDePote(int numConjunto, int elemento);
-                /*passar para private*/
-        vidro conjunto[5];
+        Jogo(); //Embaralha as cores entre os potes e deixa tudo pronto para começar
+        ~Jogo();
+        void iniciaJogo();
+        void atualizaMatrizCores(); //Define as cores para os quadrados da tela
+        void input(); //Recebe do jogador qual é a próxima jogada
+        bool fimDoJogo(); //Define quando o jogo chegou ao fim, ou seja, foi concluido
+        sf::Color getCorMatriz(int conjunto, int elemento); // Pega uma cor que está na matriz de cores
+        sf::Color getCorDePote(int numConjunto, int elemento); // Pega uma cor que está em um dos potes
+        Vidro& getVidro(int numConjunto);
     private:
-        
         bool embaralha();//ainda nao feito
-        sf::Color matrizDeCores[5][4];//
-        
-        jogada j;//define qual vidro deve passar e qual deve receber
+        sf::Color matrizDeCores[5][4];
+        Vidro conjunto[5];
+        Jogada jogada;//define qual vidro deve passar e qual deve receber
 };
+
+#endif

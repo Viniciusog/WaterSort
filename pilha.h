@@ -1,16 +1,17 @@
-/*
-Autor: Augusto dos Santos Gomes Vaz
-Programa : cabeçalho da implementação da pilha jogada do jogo water sort
+/**
+* @author Augusto dos Santos Gomes Vaz
+* Programa: cabeçalho da implementação da pilha jogada do jogo water sort
 */
+
 #ifndef PILHA_H
 #define PILHA_H
 #include <SFML/Graphics.hpp>
 
-class pilha{
+class Pilha {
     public:
         /*funcoes primitivas*/
-        pilha();//construtor
-        ~pilha();//sem muita função aqui
+        Pilha();//construtor
+        ~Pilha();//sem muita função aqui
         bool push(sf::Color novoElemento);//empilha
         bool pop(sf::Color * auxSaida);//desempilha
 
@@ -24,6 +25,4 @@ class pilha{
         sf::Color vetor[4];
         int topo;
 };
-        
-
-#endif /*PILHA_H*/
+#endif 

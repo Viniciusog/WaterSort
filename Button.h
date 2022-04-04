@@ -1,3 +1,7 @@
+/**
+ * @author Vinícius de Oliveira Guimarães
+ * Programa : Cabeçalho da classe Button. Para ser utilizado na tela, com texto no centro.
+ */
 using namespace std;
 #include <string>
 #include <iostream>

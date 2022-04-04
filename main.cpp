@@ -1,47 +1,27 @@
+/**
+ * @author Maria Luiza Edwards de M Cordeiro
+ * @author Vinícius de Oliveira Guimarães
+ * Programa : Desenho de todos os componentes do jogo na tela.
+ */
+
 #include <SFML/Graphics.hpp>
-#include "jogo.h"
+#include "Jogo.h"
 #include <iostream>
 using namespace std;
 #include "Button.h"
 #include <string>
 
-void increment(int &qtd) {
-    qtd++;
-    cout << "QTD: " << qtd << endl;
-}
-//alguma coisa
 int main()
 {
-    jogo objJogo;
+    Jogo objJogo;
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "Water sort!");
 
     sf::Font font;
-    font.loadFromFile("ariblk.ttf");
+    font.loadFromFile("./util/ariblk.ttf");
 
+    //Botões para controlar passagem dos líquidos
     Button* buttons[5];
-    Glass* potes[5];
-
-    Glass g0;
-    Glass g1;
-    Glass g2;
-    Glass g3;
-    Glass g4;
-
-    potes[0] = &g0;
-    potes[1] = &g1;
-    potes[2] = &g2;
-    potes[3] = &g3;
-    potes[4] = &g4;
-
-    objJogo.atualizaMatrizCores();
-
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 4; j++) {
-            potes[i]->setColor(j, objJogo.getCorMatriz(i, j));
-        }
-    }
-
     Button b0("1", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b1("2", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b2("3", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
@@ -70,6 +50,7 @@ int main()
     objJogo.atualizaMatrizCores();
     
 
+    // Aqui começa o controle da passagem de líquidos entre os potes
     int from = -1;
     int to = -1;
 
@@ -96,19 +77,24 @@ int main()
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                         for (int i = 0; i < 5; i++) {
                             // Verifica se o mouse clicou em algum botão
-                            if (buttons[i]->isMouseOver(window)) {      
+                            if (buttons[i]->isMouseOver(window)) {  
+                                //Se não tiver doador ainda    
                                 if(from == -1) {
                                     from = i;
                                     buttons[from]->setBackgroundColor(sf::Color::Green);
-                                } else if(to == -1) {
+                                } 
+                                //Se não tiver receptor ainda
+                                else if(to == -1) {
                                     to = i;
-                                    // fazer a mudança de cores
+                                    // Faz a mudança de cores
                                     buttons[to]->setBackgroundColor(sf::Color(255,127,39));
-                                    ok = objJogo.conjunto[from].passarLiquido(objJogo.conjunto[to]);
+                                    ok = objJogo.getVidro(from).passarLiquido(objJogo.getVidro(to));
                                     fim = objJogo.fimDoJogo();
-                                    cout << "ok? " << ok << endl;
-                                    cout << "fim? " << fim << endl;
-                                } else {
+                                    cout << "Passagem ok? " << ok << endl;
+                                    cout << "Fim do jogo? " << fim << endl;
+                                } 
+                                //Se a mudança de cores já foi feita
+                                else {
                                     buttons[from]->setActive(false);
                                     buttons[to]->setActive(false);
                                     from = i;
@@ -121,6 +107,7 @@ int main()
                     } 
                 break;
                 case sf::Event::KeyPressed:
+                    //Controla a inicialização do jogo
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
                         fim = false;
                         objJogo.iniciaJogo();
@@ -137,6 +124,7 @@ int main()
             buttons[i]->drawTo(window);
         }
 
+        //Desenha os 5 potes na tela de forma automática, sem precisar ser manualmente.
         for(int i = 0; i < 5; i++) {
             sf::RectangleShape linha1(sf::Vector2f(1.f, 20 + 4*ladoQuadrado));
             linha1.setPosition(xPilha, yPilha);
@@ -163,16 +151,15 @@ int main()
         yPote = yPilha + 20;
         xPote = xPilha + 1;
 
+        //Se for o fim do jogo
         if (fim) {
-            cout << "é o fim" << endl;
+            cout << "FIM DE JOGO" << endl;
             botaoFim.setFont(font);
             botaoFim.setPosition(sf::Vector2f(0, 0));
             botaoFim.drawTo(window);
         }
-
         window.display();
         window.clear();
     }
-
     return 0;
 }
