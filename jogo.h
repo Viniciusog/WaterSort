@@ -12,7 +12,7 @@ class jogo{
     public:
         jogo();//embaralha as cores entre os potes e deixa tudo pronto para começar
         ~jogo();//sem muita função
-        bool iniciaJogo();//inicia o jogo
+        void iniciaJogo();//inicia o jogo
         void atualizaMatrizCores();//desenha os quadrados na tela
         void input();//recebe do jogador qual é a próxima jogada
         void desenha(Glass* &glasses);

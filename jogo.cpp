@@ -9,7 +9,20 @@ Programa : implementação da classe jogável do jogo water sort
 using namespace std;
 
 jogo::jogo(){
-    //setando aos vidros como iguais para teste 
+   iniciaJogo();
+}
+
+jogo::~jogo(){}//nao tem função por hora
+
+void jogo::iniciaJogo(){
+    //primeiro temos que remover todos os elementos de todas as pilhas
+    for (int i = 0; i < 5; i++) {
+         while(!conjunto[i].vazia()) {
+             sf::Color color;
+             conjunto[i].pop(&color);
+         }
+    }
+
     sf::Color verde(34, 177, 76);
     sf::Color vermelho(210, 0, 5);
     sf::Color azul(0, 5, 201);
@@ -34,27 +47,6 @@ jogo::jogo(){
     conjunto[3].push(amarelo);
     conjunto[3].push(amarelo);
     conjunto[3].push(azul);
-
-    //setando a matriz de cores pela primeira vez
-    for (int i = 0; i < 5; i++) {
-        for(int j = 0; j < 4; j++) {
-            matrizDeCores[i][j] = sf::Color(0, 0, 0);
-        }
-    }    
-}
-
-jogo::~jogo(){}//nao tem função por hora
-
-bool jogo::iniciaJogo(){
-    while(!fimDoJogo()){//enquanto nao acontecer o final do jogo, fica recebendo inputs e fazendo as jogadas
-        atualizaMatrizCores();
-        //desenha();
-        input();
-        cout<<"deu certo? "<<conjunto[j.getDoador()].passarLiquido(conjunto[j.getReceptor()])<<endl;
-        //atualizando de acordo com as mudancas     
-    }
-    cout<<"parabens, voce ganhou o jogo!"<<endl;
-    return true;
 }
 
 bool jogo::fimDoJogo(){
