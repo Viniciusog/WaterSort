@@ -3,7 +3,6 @@
  * @author Vinícius de Oliveira Guimarães
  * Programa : Desenho de todos os componentes do jogo na tela.
  */
-
 #include <SFML/Graphics.hpp>
 #include "Jogo.h"
 #include <iostream>
