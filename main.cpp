@@ -14,7 +14,7 @@ int main()
 {
     jogo objJogo;
     
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Water sort!");
 
     sf::Font font;
     font.loadFromFile("ariblk.ttf");
@@ -103,7 +103,7 @@ int main()
                                 } else if(to == -1) {
                                     to = i;
                                     // fazer a mudança de cores
-                                    buttons[to]->setBackgroundColor(sf::Color::Magenta);
+                                    buttons[to]->setBackgroundColor(sf::Color(255,127,39));
                                     ok = objJogo.conjunto[from].passarLiquido(objJogo.conjunto[to]);
                                     fim = objJogo.fimDoJogo();
                                     cout << "ok? " << ok << endl;
