@@ -1,7 +1,7 @@
 # AlgoritmoAED
 Water sort! Jogo, para a matéria de algoritmos e estruturas de dados. UFSCar
 
-![Imagem do jogo](https://github.com/Viniciusog/AlgoritmoAED/blob/main/imagem.png)
+![Imagem do jogo](https://github.com/Viniciusog/AlgoritmoAED/blob/main/util/imagem.png)
 
 ## Como executar?
 

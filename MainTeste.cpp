@@ -7,13 +7,16 @@
 #include <SFML/Graphics.hpp>
 #include "Jogo.h"
 #include <iostream>
-using namespace std;
 #include "Button.h"
 #include <string>
 
+using namespace std;
+
 int main()
 {
-    Jogo objJogo;
+    int nVidros = 5;
+    int nCores = 4;
+    Jogo objJogo(nVidros, nCores);
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "Water sort!");
 
@@ -27,7 +30,7 @@ int main()
     Button b2("3", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b3("4", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b4("5", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-    Button botaoFim("Fim, aperte ENTER para reiniciar!", {800, 600}, 40, sf::Color::White, sf::Color::Green);
+    Button botaoFim("Fim, aperte ENTER para reiniciar!", {800, 600}, 40, sf::Color::Black, sf::Color::Green);
 
     b0.setFont(font);
     b1.setFont(font);
@@ -105,7 +108,7 @@ int main()
                             }
                         } 
                     } 
-                break;
+                    break;
                 case sf::Event::KeyPressed:
                     //Controla a inicialização do jogo
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
