@@ -144,6 +144,7 @@ void Jogo::atualizaMatrizCores(){
             if(!conjunto[i]->vazia()) {
                 // Sendo printados com j(altura) invertidos, pois a ordem de retirada e de baixo pra cima
                 conjunto[i]->pop(matrizDeCores[i][3-j]);
+
                 vetorPilhasAux[i]->push(matrizDeCores[i][3-j]); //Empilhando na pilha aux
             } else
                 matrizDeCores[i][3-j] = sf::Color(0, 0, 0);
@@ -155,6 +156,7 @@ void Jogo::atualizaMatrizCores(){
         while(!vetorPilhasAux[i]->vazia()) {
             vetorPilhasAux[i]->pop(auxSaida);//Passa para a matriz de linha(vidro) i, coluna(nivel j)
             conjunto[i]->push(auxSaida);//Reempilhando na pilha original 
+
         }
     }
 }

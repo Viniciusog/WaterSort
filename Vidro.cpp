@@ -9,6 +9,11 @@
 using namespace std;
 
 // Construtor de Vidro, seta que nao foi concluido, ou seja, nao tem todas as cores iguais
+
+Vidro::Vidro(): Pilha(4){
+    concluido = false;
+}
+
 Vidro::Vidro(int tamanho): Pilha(tamanho){
     concluido = false;
 }

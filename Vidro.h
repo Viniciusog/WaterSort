@@ -8,6 +8,7 @@
 
 class Vidro : public Pilha<sf::Color>{
     public:
+        Vidro();
         Vidro(int tamanho);
         ~Vidro();
         void setVidro(Pilha&);
