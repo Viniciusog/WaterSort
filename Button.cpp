@@ -4,8 +4,9 @@
  */
 #include "Button.h"
 #include "string"
-using namespace std;
 #include <iostream>
+
+using namespace std;
 
 Button::Button() {
     this->active = false;
