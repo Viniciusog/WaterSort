@@ -7,24 +7,31 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
-Pilha::Pilha(){
+template <class T>
+Pilha<T>::Pilha(int tamanho){
+    this->tamanho = tamanho;
+    vetor = new T [this->tamanho];
     topo = 0;
 }
 
-Pilha::~Pilha() {
+template <class T>
+Pilha<T>::~Pilha() {
     
 }
 
-bool Pilha::vazia(){
+template <class T>
+bool Pilha<T>::vazia(){
     return topo == 0;
 }
 
-bool Pilha::cheia(){
-    return topo == 4;
+template <class T>
+bool Pilha<T>::cheia(){
+    return topo == tamanho;
 }
 
 // Função de empilhar
-bool Pilha::push(sf::Color novoElemento){
+template <class T>
+bool Pilha<T>::push(T novoElemento){
     if(!cheia()){
         vetor[topo++] = novoElemento;
         return true;
@@ -33,28 +40,32 @@ bool Pilha::push(sf::Color novoElemento){
 }
 
 // Função de desempilhar
-bool Pilha::pop(sf::Color * auxSaida){
+template <class T>
+bool Pilha<T>::pop(T &auxSaida){
     if(!vazia()){
-        *auxSaida = vetor[--topo];
+        auxSaida = vetor[--topo];
         return true;
     }
     return false;
 }
 
 // Função de espiar o topo
-bool Pilha::peek(sf::Color * auxSaida){
+template <class T>
+bool Pilha<T>::peek(T & auxSaida){
     if(!vazia()){
-        *auxSaida = vetor[topo-1];
+        auxSaida = vetor[topo-1];
         return true;
     }
     return false;
 }
 
-sf::Color Pilha::getColorAtPosition(int position) {
+template <class T>
+T Pilha<T>::getColorAtPosition(int position) {
     return vetor[position];
 }
 
 //função de retornar o índice
-int Pilha::getTopo(){
+template <class T>
+int Pilha<T>::getTopo(){
     return topo;
 }

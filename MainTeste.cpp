@@ -14,7 +14,9 @@ using namespace std;
 
 int main()
 {
-    Jogo objJogo(5, 4);
+    int nVidros = 5;
+    int nCores = 4;
+    Jogo objJogo(nVidros, nCores);
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "Water sort!");
 
