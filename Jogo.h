@@ -23,7 +23,7 @@ class Jogo {
         Vidro& getVidro(int numConjunto);
     private:
         //bool embaralha();//ainda nao feito
-        sf::Color matrizDeCores[5][4];//[potes][liquidos]
+        sf::Color ** matrizDeCores;//[potes][liquidos]
         Vidro ** conjunto;
         int nVidros;
         int nCores;

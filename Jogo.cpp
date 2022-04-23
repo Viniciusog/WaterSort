@@ -15,10 +15,22 @@ Jogo::Jogo(int nVidros, int nCores){
     for(int i = 0; i < nVidros; i++)
         conjunto[i] = new Vidro (nCores);
 
+    matrizDeCores = new sf::Color * [nVidros];
+    for(int i = 0; i < nVidros; i++)
+        matrizDeCores[i] = new sf::Color;
+
+
     iniciaJogo();
 }
 
 Jogo::~Jogo() {
+    for(int i = 0; i < nVidros; i++)
+        delete [] conjunto[i];
+    delete [] conjunto;
+
+    for(int i = 0; i < nVidros; i++)
+        delete [] matrizDeCores[i];
+    delete [] matrizDeCores;
 
 }
 
