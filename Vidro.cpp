@@ -4,11 +4,16 @@
 */
 #include <iostream>
 #include "Vidro.h"
+#include "Pilha.h"
 #include <SFML/Graphics.hpp>
 using namespace std;
 
 // Construtor de Vidro, seta que nao foi concluido, ou seja, nao tem todas as cores iguais
-Vidro::Vidro() {
+Vidro::Vidro(): Pilha(4){
+    concluido = false;
+}
+
+Vidro::Vidro(int tamanho): Pilha(tamanho){
     concluido = false;
 }
 
@@ -17,10 +22,10 @@ Vidro::~Vidro() {
 }
 
 // Permite que se sete o Vidro a partir de uma pilha
-bool Vidro::setVidro(Pilha& pilhaAux) {
+void Vidro::setVidro(Pilha& pilhaAux) {
     sf::Color aux;
     while(!pilhaAux.vazia()){
-        pilhaAux.pop(&aux);
+        pilhaAux.pop(aux);
         push(aux);
     }
 }
@@ -28,7 +33,7 @@ bool Vidro::setVidro(Pilha& pilhaAux) {
 // Verifica se todos os elementos do Vidro tem a mesma cor
 bool Vidro::verificaConcluida() {
     // Declarações locais
-    Pilha pilhaAux;
+    Pilha pilhaAux (getTamanho());
     sf::Color auxSaida1, auxSaida2;
     
     // Caso esteja vazia, nao está concluida
@@ -39,8 +44,8 @@ bool Vidro::verificaConcluida() {
     
 
     while(!vazia() && concluido){
-        pop(&auxSaida1); //Desempilha o topo e compara com o elemento de baixo
-        peek(&auxSaida2);
+        pop(auxSaida1); //Desempilha o topo e compara com o elemento de baixo
+        peek(auxSaida2);
 
         //Caso o topo seja diferente do antecessor, considera falso
         if (auxSaida1 != auxSaida2) {
@@ -51,7 +56,7 @@ bool Vidro::verificaConcluida() {
 
     //Devolvendo a pilha aux para a pilha antiga
     while(!pilhaAux.vazia()){
-        pilhaAux.pop(&auxSaida1);
+        pilhaAux.pop(auxSaida1);
         push(auxSaida1);
     }
 
@@ -75,16 +80,20 @@ bool Vidro::passarLiquido(Vidro& VidroReceptor) {
     //Se o Vidro receptor estiver cheio ou o Vidro doador estiverem vazios não é possível transferir
     if (!VidroReceptor.vazia()) {
         sf::Color aux1, aux2;
-        VidroReceptor.peek(&aux1);
-        peek(&aux2);
+        VidroReceptor.peek(aux1);
+        peek(aux2);
         // Verificando se o liquido que vai ser passado é igual ao do topo do que está recebendo
+        if(!(aux2 == aux1))
+            return false;
+        /*
         if(!coresSaoIguais(aux1, aux2)) 
             return false;
+        */
     }
     
     if (!VidroReceptor.cheia() && !vazia()) {
         sf::Color auxSaida;
-        pop(&auxSaida);                     //desempilha do doador
+        pop(auxSaida);                     //desempilha do doador
         VidroReceptor.push(auxSaida);       //empilha no receptor
         VidroReceptor.verificaConcluida();  //verifica se esta concluida
         return true;

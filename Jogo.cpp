@@ -3,7 +3,7 @@
 * Programa: Implementação da classe jogável do jogo water sort
 */
 #include <iostream>
-#include "jogo.h"
+#include "Jogo.h"
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -20,7 +20,7 @@ void Jogo::iniciaJogo() {
     for (int i = 0; i < 5; i++) {
          while(!conjunto[i].vazia()) {
              sf::Color color;
-             conjunto[i].pop(&color);
+             conjunto[i].pop(color);
          }
     }
     // Insere as cores dentro dos potes
@@ -106,7 +106,15 @@ sf::Color Jogo::getCorDePote(int numConjunto, int elemento) {
 
 //Atualiza as cores dentro da matriz de cores
 void Jogo::atualizaMatrizCores(){
-    Pilha vetorPilhasAux[5]; //Guarda os elementos tirados da 
+    Pilha<sf::Color> ** vetorPilhasAux; //Guarda os elementos tirados da 
+    vetorPilhasAux = new Pilha<sf::Color> * [5];
+
+    for(int i = 0; i < 5; i++){
+        vetorPilhasAux[i] = new Pilha<sf::Color> (4);
+    }
+
+
+
     sf::Color auxSaida;
     //Desempilhando, lendo e guardando os valores das cores
     for (int i = 0; i < 5; i++) {
@@ -114,8 +122,8 @@ void Jogo::atualizaMatrizCores(){
         for (int j = 0; j < 4; j++) {
             if(!conjunto[i].vazia()) {
                 // Sendo printados com j(altura) invertidos, pois a ordem de retirada e de baixo pra cima
-                conjunto[i].pop(&matrizDeCores[i][3-j]);
-                vetorPilhasAux[i].push(matrizDeCores[i][3-j]); //Empilhando na pilha aux
+                conjunto[i].pop(matrizDeCores[i][3-j]);
+                vetorPilhasAux[i]->push(matrizDeCores[i][3-j]); //Empilhando na pilha aux
             } else
                 matrizDeCores[i][3-j] = sf::Color(0, 0, 0);
         }
@@ -123,8 +131,8 @@ void Jogo::atualizaMatrizCores(){
 
     //Empilhando novamente e anotando os valores
     for (int i = 0; i < 5; i++){
-        while(!vetorPilhasAux[i].vazia()) {
-            vetorPilhasAux[i].pop(&auxSaida);//Passa para a matriz de linha(vidro) i, coluna(nivel j)
+        while(!vetorPilhasAux[i]->vazia()) {
+            vetorPilhasAux[i]->pop(auxSaida);//Passa para a matriz de linha(vidro) i, coluna(nivel j)
             conjunto[i].push(auxSaida);//Reempilhando na pilha original 
         }
     }
