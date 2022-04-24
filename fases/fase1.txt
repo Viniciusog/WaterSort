@@ -1,7 +1,8 @@
 5
 1
-4
-verde verde verde vermelho
-vermelho vermelho vermelho verde
-azul azul azul amarelo
-amarelo verde verde vermelho 
+3
+verde verde verde 
+vermelho vermelho vermelho 
+azul azul amarelo 
+amarelo amarelo blank
+azul blank blank

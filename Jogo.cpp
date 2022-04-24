@@ -57,9 +57,7 @@ sf::Color retornaCor(string nomeCor){
         return laranja;
     if(nomeCor == "preto")
         return preto;
-    if(nomeCor == "branco")
-        return branco;
-    
+
     /*Caso nao esteja listado, retorna branco*/
     return branco;
     
@@ -105,11 +103,11 @@ void Jogo::iniciaJogo() {
 //(Um dos potes sempre irá ficar vazio ao final do jogo)
 bool Jogo::fimDoJogo(){
     int qtdSucesso = 0;
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < nVidros; i++){
         if(conjunto[i]->verificaConcluida())
             qtdSucesso++;
     }
-    return qtdSucesso == 4;
+    return qtdSucesso == nVidros - nVidrosVazios;
 }
 
 //Retorna uma cor de um dos potes
@@ -129,10 +127,10 @@ sf::Color Jogo::getCorDePote(int numConjunto, int elemento) {
 //Atualiza as cores dentro da matriz de cores
 void Jogo::atualizaMatrizCores(){
     Pilha<sf::Color> ** vetorPilhasAux; //Guarda os elementos tirados da 
-    vetorPilhasAux = new Pilha<sf::Color> * [5];
+    vetorPilhasAux = new Pilha<sf::Color> * [nVidros];
 
     for(int i = 0; i < nVidros; i++){
-        vetorPilhasAux[i] = new Pilha<sf::Color> (4);
+        vetorPilhasAux[i] = new Pilha<sf::Color> (nCores);
     }
 
 
@@ -189,15 +187,17 @@ bool Jogo::getVidros(){
                 arquivo>>aux;
     }
     /*Recebendo informacoes dos vidros*/
-    for(int i = 0; i < nVidros - nVidrosVazios; i++){//percorre os vidros
+    for(int i = 0; i < nVidros; i++){//percorre os vidros
         cout<<"vidro: "<<i+1<<endl;
         for(int j = 0; j < nCores; j++){//em cada vidro empilha o numero de cores que cabe em cada pilha
             
             string nomeCor;
             arquivo>>nomeCor;
-            conjunto[i]->push(retornaCor(nomeCor));
-            cout<<"cor : "<<j+1<<endl;
-            cout<<"empilhando cor : "<< nomeCor<<endl;
+            if(nomeCor != "blank"){
+                conjunto[i]->push(retornaCor(nomeCor));
+                cout<<"cor : "<<j+1<<endl;
+                cout<<"empilhando cor : "<< nomeCor<<endl;
+            }
         }
     }
 
