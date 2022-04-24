@@ -1,0 +1,7 @@
+5
+1
+4
+verde verde verde vermelho
+vermelho vermelho vermelho verde
+azul azul azul amarelo
+amarelo verde verde vermelho 

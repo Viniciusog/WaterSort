@@ -12,9 +12,30 @@
 
 using namespace std;
 
+
+Button ** criaBotoes(int nVidros){
+    /*fonte*/
+    sf::Font font;
+    font.loadFromFile("./util/ariblk.ttf");
+
+    /*botoes*/
+    Button ** buttons;
+    for(int i = 0; i < nVidros; i++){
+        Button * botao = new Button (to_string(i+1), {50, 50}, 20, sf::Color::Blue, sf::Color::White);
+        botao->setFont(font);
+        botao->setPosition({(float)10 + 60 * i, 10});
+        buttons[i] = botao;
+    }
+
+    return buttons;
+}
+
+
+
 int main()
 {
-    Jogo objJogo(5, 4);
+    int nVidros = 5;
+    Jogo objJogo;
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "Water sort!");
 
@@ -22,13 +43,18 @@ int main()
     font.loadFromFile("./util/ariblk.ttf");
 
     //Botões para controlar passagem dos líquidos
+    Button botaoFim("Fim, aperte ENTER para reiniciar!", {800, 600}, 40, sf::Color::Black, sf::Color::Green);
+
     Button* buttons[5];
+    //buttons = criaBotoes(nVidros);
+
+    
     Button b0("1", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b1("2", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b2("3", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b3("4", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
     Button b4("5", {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-    Button botaoFim("Fim, aperte ENTER para reiniciar!", {800, 600}, 40, sf::Color::Black, sf::Color::Green);
+    
 
     b0.setFont(font);
     b1.setFont(font);
@@ -48,6 +74,7 @@ int main()
     buttons[3] = &b3;
     buttons[4] = &b4;
 
+    
     objJogo.atualizaMatrizCores();
     
 
