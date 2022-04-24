@@ -11,8 +11,9 @@
 #include <SFML/Graphics.hpp>
 
 class Jogo {
+
     public:
-        Jogo(int nVidros, int nCores); //Embaralha as cores entre os potes e deixa tudo pronto para começar
+        Jogo();
         ~Jogo();
         void iniciaJogo();
         void atualizaMatrizCores(); //Define as cores para os quadrados da tela
@@ -21,13 +22,19 @@ class Jogo {
         sf::Color getCorMatriz(int conjunto, int elemento); // Pega uma cor que está na matriz de cores
         sf::Color getCorDePote(int numConjunto, int elemento); // Pega uma cor que está em um dos potes
         Vidro& getVidro(int numConjunto);
+        /*Pega todas as informacoes necessaria pra criar a fase*/
+        bool getFase(/*int nArquivo*/);
+        bool getVidros();
     private:
-        //bool embaralha();//ainda nao feito
         sf::Color ** matrizDeCores;//[potes][liquidos]
         Vidro ** conjunto;
         int nVidros;
+        int nVidrosVazios;
         int nCores;
         Jogada jogada;//define qual vidro deve passar e qual deve receber
+
+    /*retorna a cor dada pela string*/
+    friend sf::Color retornaCor(std::string nomeCor);
 };
 
 #endif
