@@ -2,6 +2,7 @@
 numero de vidros
 numero de vidros vazios no final do jogo
 numero de cores por vidro
+<path da imagem da fase>/imagemFase.jpg
 
 cor cor cor cor
 cor cor cor cor
@@ -41,6 +42,7 @@ preto(0, 0, 0);
 5
 1
 4
+background/imageFase1.jpg
 
 vermelho vermelho vermelho vermelho
 verde verde verde blank

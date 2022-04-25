@@ -1,4 +1,11 @@
-23
-7
-Cacau
-Campinas
+5
+1
+5
+
+background/imageFase1.jpg
+
+rosa rosa ciano blank blank
+rosa ciano blank blank blank
+rosa rosa blank blank blank
+amarelo amarelo amarelo ciano blank
+lima lima amarelo ciano rosa
