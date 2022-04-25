@@ -58,49 +58,41 @@ sf::Color retornaCor(string nomeCor){
         return preto;
 
     /*Caso nao esteja listado, retorna branco*/
-    return branco;
-    
+    return branco;   
 }
 
-
-
-Jogo::Jogo(){
-    cout<<"qual a fase?"<<endl;
-    cin>>fase;
-    iniciaJogo(fase);
+Jogo::Jogo() {
+    this->fase = 1;
+    iniciaJogo(this->fase);
 }
 
+Jogo::Jogo(int fase) {
+    this->fase = fase;
+    iniciaJogo(this->fase);
+}
 
 Jogo::~Jogo() {
     for(int i = 0; i < nVidros; i++)
         delete [] conjunto[i];
     delete [] conjunto;
-
-    for(int i = 0; i < nVidros; i++)
-        delete [] matrizDeCores[i];
-    delete [] matrizDeCores;
-
 }
 
 
 void Jogo::iniciaJogo(int fase) {
-    this->fase = fase;
-    getFase();
+        this->fase = fase;
+        getFase();
 
-    /*Alocando o conjunto*/
-    conjunto = new Vidro *[nVidros];
-    for(int i = 0; i < nVidros; i++)
-        conjunto[i] = new Vidro (nCores);
+        cout << "Vidros: " << nVidros << endl;
+        cout << "VidrosVazios: " << nVidrosVazios << endl;
+        cout << "Cores: " << nCores << endl;
 
-    matrizDeCores = new sf::Color * [nVidros];
-    for(int i = 0; i < nVidros; i++)
-        matrizDeCores[i] = new sf::Color;
-
-
-    getVidros();
+        /*Alocando o conjunto*/
+        conjunto = new Vidro *[nVidros];
+        for (int i = 0; i < nVidros; i++) {
+            conjunto[i] = new Vidro(nCores);
+        }   
+        getVidros();
 }
-
-
 
 //Retorna true se 4 dos 5 potes estiverem completos
 //(Um dos potes sempre irá ficar vazio ao final do jogo)
@@ -114,7 +106,6 @@ bool Jogo::fimDoJogo(){
         return true;
     }        
     return false;
-
 }
 
 //Retorna uma cor de um dos potes
@@ -131,49 +122,10 @@ sf::Color Jogo::getCorDePote(int numConjunto, int elemento) {
     }
 }
 
-//Atualiza as cores dentro da matriz de cores
-void Jogo::atualizaMatrizCores(){
-    Pilha<sf::Color> ** vetorPilhasAux; //Guarda os elementos tirados da 
-    vetorPilhasAux = new Pilha<sf::Color> * [nVidros];
-
-    for(int i = 0; i < nVidros; i++){
-        vetorPilhasAux[i] = new Pilha<sf::Color> (nCores);
-    }
-
-
-
-    sf::Color auxSaida;
-    //Desempilhando, lendo e guardando os valores das cores
-    for (int i = 0; i < nVidros; i++) {
-        for (int j = 0; j < nCores; j++) {
-            if(!conjunto[i]->vazia()) {
-                // Sendo printados com j(altura) invertidos, pois a ordem de retirada e de baixo pra cima
-                conjunto[i]->pop(matrizDeCores[i][nCores-1-j]);
-
-                vetorPilhasAux[i]->push(matrizDeCores[i][nCores-1-j]); //Empilhando na pilha aux
-            }else
-                matrizDeCores[i][nCores-1-j];
-        }
-    }
-
-    //Empilhando novamente e anotando os valores
-    for (int i = 0; i < nVidros; i++){
-        while(!vetorPilhasAux[i]->vazia()) {
-            vetorPilhasAux[i]->pop(auxSaida);//Passa para a matriz de linha(vidro) i, coluna(nivel j)
-            conjunto[i]->push(auxSaida);//Reempilhando na pilha original 
-
-        }
-    }
-}
-
 Vidro& Jogo::getVidro(int numConjunto) {
     return *conjunto[numConjunto];
 }
 
-//Retorna uma cor de dentro da matriz de cores
-sf::Color Jogo::getCorMatriz(int conjunto, int elemento) {
-    return this->matrizDeCores[conjunto][elemento];
-}
 
 bool Jogo::getVidros(){
     fstream arquivo;
@@ -213,8 +165,10 @@ bool Jogo::getFase(){
     fstream arquivo;
     arquivo.open("fases/fase"+to_string(fase)+".txt", ios::in);
 
-    if(!arquivo)
+    if(!arquivo) {
+        cout << "arquivo fechado" << endl;
         return false;
+    }
 
     /*Recebendo parametros gerais*/
     arquivo>>nVidros;
@@ -229,19 +183,19 @@ int Jogo::getNVidros(){
     return nVidros;
 }
 
-int Jogo::getNVidrosVazios(){
+int Jogo::getNVidrosVazios() {
     return nVidrosVazios;
 }
 
-int Jogo::getNCores(){
+int Jogo::getNCores() {
     return nCores;
 }
 
-string Jogo::getBackground(){
+string Jogo::getBackground() {
     return background;
 }
 
-
+/*Desenha os vidros na tela*/
 void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo){
         /*Determinando as posicoes*/
         int xCor = 100;
@@ -253,13 +207,11 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo){
         int larguraCor = larguraVidro;
         int alturaCor = alturaVidro / objJogo.getNCores();
 
-
         //Desenha os 5 potes na tela de forma automática
         for(int i = 0; i < objJogo.getNVidros(); i++) {
             /*parede esquerda do vidro*/
             sf::RectangleShape linha1(sf::Vector2f(1.f, 20 + alturaVidro));
             linha1.setPosition(xCor, yCor);
-            
 
             /*parede de baixo do vidro*/
             sf::RectangleShape linha2(sf::Vector2f(larguraVidro + 2, 1.f));
@@ -275,11 +227,11 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo){
             window.draw(linha3);
 
             /*desenhando as cores*/
-            for (int j = objJogo.getNCores() -1; j >= 0; j--) {
+            for (int j = objJogo.getNCores() - 1; j >= 0; j--) {
                 sf::RectangleShape shape1(sf::Vector2f(larguraCor, alturaCor));
 
                 /*caso a cor nao seja vazia*/
-                if(objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
+                if (objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
                     shape1.setFillColor(objJogo.getCorDePote(i, j));
                     shape1.setPosition(xPote, yPote);
                     window.draw(shape1);
