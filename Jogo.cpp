@@ -64,7 +64,9 @@ sf::Color retornaCor(string nomeCor){
 
 
 
-Jogo::Jogo() : fase(1){
+Jogo::Jogo(){
+    cout<<"qual a fase?"<<endl;
+    cin>>fase;
     iniciaJogo(fase);
 }
 

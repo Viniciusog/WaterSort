@@ -4,6 +4,6 @@
 
 background/imageFase1.jpg
 
-rosa rosa rosa blank
-rosa ciano blank blank
-ciano ciano ciano blank
+azul laranja azul laranja
+laranja azul laranja azul
+blank blank blank blank

@@ -47,11 +47,12 @@ int main(){
 
     int ok = 1;
 
-    int xCor, yCor, xPote, yPote, alturaVidro, larguraVidro, alturaCor, larguraCor;
         
     while (window.isOpen())
     {
         sf::Event event;
+        
+
         
         while (window.pollEvent(event))
         {

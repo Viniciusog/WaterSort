@@ -1,9 +1,8 @@
-3
+2
 1
-4
+3
 
-background/imageFase1.jpg
+background/imageFase2.png
 
-vermelho vermelho vermelho blank
-verde verde verde verde
-vermelho blank blank blank
+vermelho blank blank
+vermelho vermelho blank
