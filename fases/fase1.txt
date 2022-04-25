@@ -1,7 +1,9 @@
-5
+3
 1
 4
-verde verde verde vermelho
-vermelho vermelho vermelho verde
-azul azul azul amarelo
-amarelo verde verde vermelho 
+
+background/imageFase1.jpg
+
+vermelho vermelho vermelho blank
+verde verde verde verde
+vermelho blank blank blank

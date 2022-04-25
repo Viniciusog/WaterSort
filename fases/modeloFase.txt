@@ -1,0 +1,52 @@
+|----------------------------Modelo das fases----------------------------|
+numero de vidros
+numero de vidros vazios no final do jogo
+numero de cores por vidro
+<path da imagem da fase>/imagemFase.jpg
+
+cor cor cor cor
+cor cor cor cor
+...
+cor cor cor cor
+
+|-------------------------As cores diponiveis sao------------------------|
+# cor (respectivo rgb)
+# Usar somente o nome da cor (sem o rgb)
+# O branco e reservado para erros de leitura na cor no programa
+# Espacos em branco devem preenchidos com " blank"
+
+verde (34, 177, 76)
+lima (0, 255, 0)
+vermelho(210, 0, 5)
+salmao(250, 128, 114)
+fuchsia(255, 0, 255)
+roxo(128, 0, 128)
+rosa(255, 20, 147)
+azul(0, 5, 201)
+navy(0, 0, 128)
+ciano(0, 255, 255);
+amarelo(197, 206, 4);
+laranja(255, 69, 0);
+preto(0, 0, 0);
+
+|---------------------------Parametros da fase---------------------------|
+# O numero de potes, como e de se esperar, indica o numero de potes
+# O numero de potes pode ir ate 7 potes
+
+# O numero maximo de cores e 7, mas limitou-se a 6 por seguranca
+
+
+
+|--------------------------------Exemplo---------------------------------|
+
+5
+1
+4
+background/imageFase1.jpg
+
+vermelho vermelho vermelho vermelho
+verde verde verde blank
+verde ciano ciano azul 
+azul azul azul blank
+ciano ciano blank blank 
+|------------------------------------------------------------------------|
