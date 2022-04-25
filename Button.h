@@ -2,6 +2,10 @@
  * @author Vinícius de Oliveira Guimarães
  * Programa : Cabeçalho da classe Button. Para ser utilizado na tela, com texto no centro.
  */
+
+#ifndef BUTTON_H
+#define BUTTON_H
+
 using namespace std;
 #include <string>
 #include <iostream>
@@ -14,11 +18,13 @@ class Button {
         ~Button();
         void setFont(sf::Font &fonte);
         void setText(string text);
+        float getWidth() const;
         void setDefaultBackgroundColor(sf::Color cor);
         void setBackgroundColor(sf::Color cor);
         void setTextColor(sf::Color cor);
-        string getText() const;
-        void setPosition(sf::Vector2f pos);
+/*         void toggleInvisible();
+ */        string getText() const;
+        void setPosition(sf::Vector2f pos, bool botaoEnd);
         void drawTo(sf::RenderWindow &window);
         bool isMouseOver(sf::RenderWindow &window);
         void setActive(bool act);
@@ -29,4 +35,7 @@ class Button {
         sf::Color bgColor;
         sf::Color defaultBgColor;
         bool active;
+        bool invisible;
 };
+
+#endif

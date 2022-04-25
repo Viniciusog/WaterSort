@@ -1,12 +1,12 @@
-5
-2
+3
+1
 4
 
 background/imageFase1.jpg
 
-azul laranja vermelho azul
-laranja laranja vermelho azul
-vermelho azul laranja vermelho
+azul azul azul verde
+verde verde verde azul
+blank blank blank blank
 blank blank blank blank
 blank blank blank blank
 blank blank blank blank

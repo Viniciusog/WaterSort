@@ -6,6 +6,7 @@
 #include "Jogo.h"
 #include <SFML/Graphics.hpp>
 #include <fstream>
+#include "Button.h"
 using namespace std;
 
 sf::Color retornaCor(string nomeCor){
@@ -195,23 +196,29 @@ string Jogo::getBackground() {
 }
 
 /*Desenha os vidros na tela*/
-void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo) {
+void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons) {
+
+        int nVidros = objJogo.getNVidros();
         /*Determinando as posicoes*/
-        int xCor = 100;
+        int larguraVidro = 78;
+        int alturaVidro = 240;
+        int larguraCor = larguraVidro;
+        int alturaCor = alturaVidro / objJogo.getNCores();
+        
+        int tamanhoTotal = nVidros * (larguraVidro + 2) + (nVidros - 1) * (136-larguraVidro);
+        int xCentro = 540;
+
+        int xCor = xCentro - (tamanhoTotal / 2);
         int yCor = 300;
         int xPote = xCor + 1;
         int yPote = yCor + 20;
-        int alturaVidro = 240;
-        int larguraVidro = 80;
-        int larguraCor = larguraVidro;
-        int alturaCor = alturaVidro / objJogo.getNCores();
-
-        //Desenha os N potes na tela de forma automática
+       
+        //Desenha os 5 potes na tela de forma automática
         for(int i = 0; i < objJogo.getNVidros(); i++) {
             /*parede esquerda do vidro*/
             sf::RectangleShape linha1(sf::Vector2f(1.f, 20 + alturaVidro));
             linha1.setPosition(xCor, yCor);
-
+            
             /*parede de baixo do vidro*/
             sf::RectangleShape linha2(sf::Vector2f(larguraVidro + 2, 1.f));
             linha2.setPosition(xCor, yPote + alturaVidro); 
@@ -220,17 +227,22 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo) {
             sf::RectangleShape linha3(sf::Vector2f(1.f, 20 + alturaVidro));
             linha3.setPosition(xCor + larguraVidro + 1, yCor);
 
+            float yBotao = yPote + alturaVidro + 30;
+            float xBotao = xCor + (larguraVidro + 2 - buttons[i]->getWidth()) / 2;
+            buttons[i]->setPosition({xBotao, yBotao}, false);
+            buttons[i]->drawTo(window);
+
             /*desenhando as paredes*/
             window.draw(linha1);
             window.draw(linha2);
             window.draw(linha3);
 
             /*desenhando as cores*/
-            for (int j = objJogo.getNCores() - 1; j >= 0; j--) {
+            for (int j = objJogo.getNCores() -1; j >= 0; j--) {
                 sf::RectangleShape shape1(sf::Vector2f(larguraCor, alturaCor));
 
                 /*caso a cor nao seja vazia*/
-                if (objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
+                if(objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
                     shape1.setFillColor(objJogo.getCorDePote(i, j));
                     shape1.setPosition(xPote, yPote);
                     window.draw(shape1);
@@ -238,7 +250,7 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo) {
                 yPote += alturaCor;
             }
             //incrementando os valores  das posicoes dos potes
-            xCor += alturaCor + 1 + 100;
+            xCor += /* alturaCor + */ 1 + 135;
             yPote = yCor + 20;
             xPote = xCor + 1;
         }

@@ -8,6 +8,7 @@
 #include "Vidro.h"
 #include "Pilha.h"
 #include "Jogada.h"
+#include "Button.h"
 #include <SFML/Graphics.hpp>
 
 class Jogo {
@@ -39,7 +40,7 @@ class Jogo {
 
     /*retorna a cor dada pela string*/
     friend sf::Color retornaCor(std::string nomeCor);
-    friend void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo);
+    friend void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons);
 };
 
 #endif

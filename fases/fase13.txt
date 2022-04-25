@@ -1,0 +1,14 @@
+7
+2
+4
+
+background/imageFase1.jpg
+
+roxo rosa roxo vermelho
+rosa ciano ciano rosa
+ciano verde vermelho verde
+vermelho verde roxo ciano
+vermelho roxo verde rosa
+
+blank blank blank blank
+blank blank blank blank
