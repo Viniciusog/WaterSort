@@ -14,30 +14,29 @@ using namespace std;
 
 int main(){
     int fase = 1;
-    Jogo *objJogo = new Jogo(fase);
+    Jogo objJogo;
     
     sf::RenderWindow window(sf::VideoMode(1080, 720), "Water sort!");
     sf::Texture textura;
-    textura.loadFromFile(objJogo->getBackground());
+    textura.loadFromFile(objJogo.getBackground());
     sf::Sprite sprite(textura);
 
     sf::Font font;
     font.loadFromFile("./util/ariblk.ttf");
 
     //botoes de potes
-    Button* buttons[objJogo->getNVidros()];
+    Button* buttons[objJogo.getNVidros()];
 
     //Botões para controlar passagem dos líquidos
     Button botaoFim("Parabens! precione enter para passar para a proxima fase", {40, 30}, 40, sf::Color::Black, sf::Color::Green);
 
-    for(int i = 0; i < objJogo->getNVidros(); i++) {
+    for(int i = 0; i < objJogo.getNVidros(); i++) {
         Button * novoBotao = new Button (to_string(i+1), {50, 50}, 20, sf::Color::Blue, sf::Color::White);
         novoBotao->setFont(font);
         novoBotao->setPosition({(float)10 + 60 * i, 10});
         buttons[i] = novoBotao;
     }
         
-
     // Aqui começa o controle da passagem de líquidos entre os potes
     int from = -1;
     int to = -1;
@@ -52,16 +51,16 @@ int main(){
         
         while (window.pollEvent(event))
         {
-            cout << "Vidros: " << objJogo->getNVidros() << endl;
-            cout << "Cores: " << objJogo->getNCores() << endl;
-            cout << "Vidros vazios: " << objJogo->getNVidrosVazios() << endl;
+            cout << "Vidros: " << objJogo.getNVidros() << endl;
+            cout << "Cores: " << objJogo.getNCores() << endl;
+            cout << "Vidros vazios: " << objJogo.getNVidrosVazios() << endl;
             switch (event.type) {
                 case sf::Event::Closed:
                     window.close();
                     break;
                 case sf::Event::MouseButtonPressed:
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                        for (int i = 0; i < objJogo->getNVidros() ; i++) {
+                        for (int i = 0; i < objJogo.getNVidros(); i++) {
                             // Verifica se o mouse clicou em algum botão
                             if (buttons[i]->isMouseOver(window)) {  
                                 //Se não tiver doador ainda    
@@ -74,9 +73,9 @@ int main(){
                                     to = i;
                                     // Faz a mudança de cores
                                     buttons[to]->setBackgroundColor(sf::Color(255,127,39));
-                                    ok = objJogo->getVidro(from).passarLiquido(objJogo->getVidro(to));
+                                    ok = objJogo.getVidro(from).passarLiquido(objJogo.getVidro(to));
                                     cout << "Passagem ok? " << ok << endl;
-                                    cout << "Fim do jogo? " << objJogo->fimDoJogo() << endl;
+                                    cout << "Fim do jogo? " << objJogo.fimDoJogo() << endl;
                                 } 
                                 //Se a mudança de cores já foi feita
                                 else {
@@ -95,10 +94,7 @@ int main(){
                     //Controla a inicialização do jogo
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
                         fase++;
-                        ///delete objJogo;
-                        objJogo = new Jogo(fase);
-
-                        //objJogo.iniciaJogo(fase);
+                        objJogo.iniciaJogo(fase);
                         buttons[from]->setActive(false);
                         buttons[to]->setActive(false);
                         from = -1;
@@ -111,22 +107,16 @@ int main(){
         /*Desenhando o background*/
         window.draw(sprite);
 
-
         /*Desenhando os botoes*/
-        for (int i = 0; i < objJogo->getNVidros(); i++) {
+        for (int i = 0; i < objJogo.getNVidros(); i++) {
             buttons[i]->drawTo(window);
         }
 
-        desenhaVidros(window, *objJogo);
-
+        desenhaVidros(window, objJogo);
 
         //Se for o fim do jogo
-        if (objJogo->fimDoJogo()) {
-
-            
-            
+        if (objJogo.fimDoJogo()) {
             cout << "FIM DE JOGO" << endl;
-
             /*setando botao do fim*/
             botaoFim.setFont(font);
             botaoFim.setPosition(sf::Vector2f(0, 0));
