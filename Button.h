@@ -17,6 +17,7 @@ class Button {
         void setDefaultBackgroundColor(sf::Color cor);
         void setBackgroundColor(sf::Color cor);
         void setTextColor(sf::Color cor);
+        string getText() const;
         void setPosition(sf::Vector2f pos);
         void drawTo(sf::RenderWindow &window);
         bool isMouseOver(sf::RenderWindow &window);
