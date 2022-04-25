@@ -12,28 +12,9 @@
 
 using namespace std;
 
-/*nao funciona*/
-Button ** criaBotoes(int nVidros){
-    /*fonte*/
-    sf::Font font;
-    font.loadFromFile("./util/ariblk.ttf");
-
-    /*botoes*/
-    Button ** buttons;
-    for(int i = 0; i < nVidros; i++){
-        Button * botao = new Button (to_string(i+1), {50, 50}, 20, sf::Color::Blue, sf::Color::White);
-        botao->setFont(font);
-        botao->setPosition({(float)10 + 60 * i, 10});
-        buttons[i] = botao;
-    }
-
-    return buttons;
-}
-
-
 int main(){
-    int fase = 3;
-    Jogo objJogo(fase);
+    int fase = 1;
+    Jogo objJogo;
     
     sf::RenderWindow window(sf::VideoMode(1080, 720), "Water sort!");
     sf::Texture textura;
@@ -43,11 +24,12 @@ int main(){
     sf::Font font;
     font.loadFromFile("./util/ariblk.ttf");
 
-    //Botões para controlar passagem dos líquidos
-    Button botaoFim("Fim, aperte ENTER para reiniciar!", {800, 600}, 40, sf::Color::Black, sf::Color::Green);
-
+    //botoes de potes
     Button* buttons[objJogo.getNVidros()];
-    //buttons = criaBotoes(nVidros);
+
+    //Botões para controlar passagem dos líquidos
+    Button botaoFim("Parabens! precione enter para passar para a proxima fase", {40, 30}, 40, sf::Color::Black, sf::Color::Green);
+
 
     for(int i = 0; i < objJogo.getNVidros(); i++){
         Button * novoBotao = new Button (to_string(i+1), {50, 50}, 20, sf::Color::Blue, sf::Color::White);
@@ -112,7 +94,8 @@ int main(){
                 case sf::Event::KeyPressed:
                     //Controla a inicialização do jogo
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-                        objJogo.iniciaJogo();
+                        fase++;
+                        objJogo.iniciaJogo(fase);
                         buttons[from]->setActive(false);
                         buttons[to]->setActive(false);
                         from = -1;
@@ -135,10 +118,8 @@ int main(){
 
         //Se for o fim do jogo
         if (objJogo.fimDoJogo()) {
-            /*desalocando os botoes*/
+
             
-            for(int i = 0; i < objJogo.getNVidros(); i++)
-                delete buttons[i];
             
             cout << "FIM DE JOGO" << endl;
 

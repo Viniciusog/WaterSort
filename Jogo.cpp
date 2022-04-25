@@ -65,13 +65,7 @@ sf::Color retornaCor(string nomeCor){
 
 
 Jogo::Jogo() : fase(1){
-    getFase();
-    iniciaJogo();
-}
-
-Jogo::Jogo(int fase) : fase(fase){
-    getFase();
-    iniciaJogo();
+    iniciaJogo(fase);
 }
 
 
@@ -87,7 +81,10 @@ Jogo::~Jogo() {
 }
 
 
-void Jogo::iniciaJogo() {
+void Jogo::iniciaJogo(int fase) {
+    this->fase = fase;
+    getFase();
+
     /*Alocando o conjunto*/
     conjunto = new Vidro *[nVidros];
     for(int i = 0; i < nVidros; i++)
@@ -110,8 +107,12 @@ bool Jogo::fimDoJogo(){
     for (int i = 0; i < nVidros; i++){
         if(conjunto[i]->verificaConcluida())
             qtdSucesso++;
-    }
-    return qtdSucesso == nVidros - nVidrosVazios;
+    } 
+    if (qtdSucesso == nVidros - nVidrosVazios){
+        return true;
+    }        
+    return false;
+
 }
 
 //Retorna uma cor de um dos potes

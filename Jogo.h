@@ -13,9 +13,8 @@
 class Jogo {
     public:
         Jogo();
-        Jogo(int fase);
         ~Jogo();
-        void iniciaJogo();
+        void iniciaJogo(int fase);
         void atualizaMatrizCores(); //Define as cores para os quadrados da tela
         //void input(); //Recebe do jogador qual é a próxima jogada
         bool fimDoJogo(); //Define quando o jogo chegou ao fim, ou seja, foi concluido
