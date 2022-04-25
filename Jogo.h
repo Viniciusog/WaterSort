@@ -25,6 +25,11 @@ class Jogo {
         /*Pega todas as informacoes necessaria pra criar a fase*/
         bool getFase(/*int nArquivo*/);
         bool getVidros();
+
+        /*getters de informacoes da fase*/
+        int getNVidros();
+        int getNVidrosVazios();
+        int getNCores();
     private:
         sf::Color ** matrizDeCores;//[potes][liquidos]
         Vidro ** conjunto;

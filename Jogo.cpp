@@ -27,9 +27,8 @@ sf::Color retornaCor(string nomeCor){
     sf::Color branco(255, 255, 255);
 
     /*determinacao da saida*/
-    if(nomeCor == "verde"){
+    if(nomeCor == "verde")
         return verde;
-    }
     
     if(nomeCor == "lima")
         return lima;
@@ -112,7 +111,7 @@ bool Jogo::fimDoJogo(){
 
 //Retorna uma cor de um dos potes
 sf::Color Jogo::getCorDePote(int numConjunto, int elemento) {
-    if (numConjunto > 4) {
+    if (numConjunto > nVidros) {
         cout << "Não existe pote com o número: " << numConjunto << endl;
     }
 
@@ -182,21 +181,18 @@ bool Jogo::getVidros(){
          }
     }
 
+    /*pulandos os tres primeiros termos que sao os parametros do jogo*/
     for(int k = 0; k < 3; k++){
                 int aux;
                 arquivo>>aux;
     }
     /*Recebendo informacoes dos vidros*/
     for(int i = 0; i < nVidros; i++){//percorre os vidros
-        cout<<"vidro: "<<i+1<<endl;
         for(int j = 0; j < nCores; j++){//em cada vidro empilha o numero de cores que cabe em cada pilha
-            
             string nomeCor;
             arquivo>>nomeCor;
             if(nomeCor != "blank"){
                 conjunto[i]->push(retornaCor(nomeCor));
-                cout<<"cor : "<<j+1<<endl;
-                cout<<"empilhando cor : "<< nomeCor<<endl;
             }
         }
     }
@@ -225,12 +221,20 @@ bool Jogo::getFase(/*int nArquivo*/){
     arquivo>>nVidros;
     arquivo>>nVidrosVazios;
     arquivo>>nCores;
-
-    cout<<nVidros<<endl;
-    cout<<nVidrosVazios<<endl;
-    cout<<nCores<<endl;
-
     arquivo.close();
     return true;
 }
+
+int Jogo::getNVidros(){
+    return nVidros;
+}
+
+int Jogo::getNVidrosVazios(){
+    return nVidrosVazios;
+}
+
+int Jogo::getNCores(){
+    return nCores;
+}
+
 
