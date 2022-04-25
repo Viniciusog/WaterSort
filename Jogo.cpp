@@ -27,10 +27,9 @@ sf::Color retornaCor(string nomeCor){
     sf::Color preto(0, 0, 0);
     sf::Color branco(255, 255, 255);
 
-    /*determinacao da saida*/
+    /* Determinacao da saida*/
     if (nomeCor == "verde")
         return verde;
-    
     if (nomeCor == "lima")
         return lima;
     if (nomeCor == "vermelho")
@@ -61,31 +60,20 @@ sf::Color retornaCor(string nomeCor){
     return branco;   
 }
 
-Jogo::Jogo() {
-    this->fase = 1;
-    iniciaJogo(this->fase);
-}
-
-Jogo::Jogo(int fase) {
+Jogo::Jogo(int fase=1) {
     this->fase = fase;
     iniciaJogo(this->fase);
+    jogada.setDoador(-1);
+    jogada.setReceptor(-1);
 }
 
 Jogo::~Jogo() {
-    /* for (int i = 0; i < nVidros; i++) {
-        delete [] conjunto[i];
-    } */
-    //delete [] conjunto;
+    cout << "Chamada do destrutor" << endl;
 }
-
 
 void Jogo::iniciaJogo(int fase) {
         this->fase = fase;
         getFase();
-
-        cout << "Vidros: " << nVidros << endl;
-        cout << "VidrosVazios: " << nVidrosVazios << endl;
-        cout << "Cores: " << nCores << endl;
 
         /*Alocando o conjunto*/
         conjunto = new Vidro *[7];
@@ -127,7 +115,6 @@ Vidro& Jogo::getVidro(int numConjunto) {
     return *conjunto[numConjunto];
 }
 
-
 bool Jogo::getVidros() {
     fstream arquivo;
     arquivo.open("fases/fase"+to_string(fase)+".txt", ios::in);
@@ -166,7 +153,6 @@ bool Jogo::getFase() {
     arquivo.open("fases/fase"+to_string(fase)+".txt", ios::in);
 
     if (!arquivo) {
-        cout << "arquivo fechado" << endl;
         return false;
     }
 
@@ -195,6 +181,22 @@ string Jogo::getBackground() {
     return background;
 }
 
+void Jogo::atualizaDoador(int doador) {
+    jogada.setDoador(doador);
+}
+
+void Jogo::atualizaReceptor(int recp) {
+    jogada.setReceptor(recp);
+}
+
+int Jogo::getDoador() const {
+    return jogada.getDoador();
+}
+
+int Jogo::getReceptor() const {
+    return jogada.getReceptor();
+}
+
 /*Desenha os vidros na tela*/
 void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons) {
 
@@ -215,15 +217,15 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons) {
        
         //Desenha os 5 potes na tela de forma automática
         for(int i = 0; i < objJogo.getNVidros(); i++) {
-            /*parede esquerda do vidro*/
+            /*Parede esquerda do vidro*/
             sf::RectangleShape linha1(sf::Vector2f(1.f, 20 + alturaVidro));
             linha1.setPosition(xCor, yCor);
             
-            /*parede de baixo do vidro*/
+            /*Parede de baixo do vidro*/
             sf::RectangleShape linha2(sf::Vector2f(larguraVidro + 2, 1.f));
             linha2.setPosition(xCor, yPote + alturaVidro); 
 
-            /*parede direita do vidro*/
+            /*Parede direita do vidro*/
             sf::RectangleShape linha3(sf::Vector2f(1.f, 20 + alturaVidro));
             linha3.setPosition(xCor + larguraVidro + 1, yCor);
 
@@ -232,16 +234,16 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons) {
             buttons[i]->setPosition({xBotao, yBotao}, false);
             buttons[i]->drawTo(window);
 
-            /*desenhando as paredes*/
+            /*Desenhando as paredes*/
             window.draw(linha1);
             window.draw(linha2);
             window.draw(linha3);
 
-            /*desenhando as cores*/
+            /*Dsenhando as cores*/
             for (int j = objJogo.getNCores() -1; j >= 0; j--) {
                 sf::RectangleShape shape1(sf::Vector2f(larguraCor, alturaCor));
 
-                /*caso a cor nao seja vazia*/
+                /*Caso a cor nao seja vazia*/
                 if(objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
                     shape1.setFillColor(objJogo.getCorDePote(i, j));
                     shape1.setPosition(xPote, yPote);
@@ -249,8 +251,8 @@ void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons) {
                 }    
                 yPote += alturaCor;
             }
-            //incrementando os valores  das posicoes dos potes
-            xCor += /* alturaCor + */ 1 + 135;
+            //Incrementando os valores  das posicoes dos potes
+            xCor += 1 + 135;
             yPote = yCor + 20;
             xPote = xCor + 1;
         }

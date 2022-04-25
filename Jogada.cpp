@@ -17,10 +17,10 @@ void Jogada::setReceptor(int vidroReceptor){
     this->vidroReceptor = vidroReceptor;
 }
 
-int Jogada::getDoador(){
+int Jogada::getDoador() const {
     return vidroDoador;
 }
 
-int Jogada::getReceptor(){
+int Jogada::getReceptor() const {
     return vidroReceptor;
 }

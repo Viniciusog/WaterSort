@@ -39,11 +39,6 @@ int main() {
     }
         
     //Aqui começa o controle da passagem de líquidos entre os potes
-    int from = -1;
-    int to = -1;
-
-    int ok = 1;
-
     int xCor, yCor, xPote, yPote, alturaVidro, larguraVidro, alturaCor, larguraCor;
         
     while (window.isOpen())
@@ -65,26 +60,24 @@ int main() {
                             //Verifica se o mouse clicou em algum botão
                             if (buttons[i]->isMouseOver(window)) {  
                                 //Se não tiver doador ainda    
-                                if(from == -1) {
-                                    from = i;
-                                    buttons[from]->setBackgroundColor(sf::Color::Green);
+                                if(objJogo.getDoador() == -1) {
+                                    objJogo.atualizaDoador(i);
+                                    buttons[objJogo.getDoador()]->setBackgroundColor(sf::Color::Green);
                                 } 
                                 //Se não tiver receptor ainda
-                                else if(to == -1) {
-                                    to = i;
+                                else if(objJogo.getReceptor() == -1) {
+                                    objJogo.atualizaReceptor(i);
                                     // Faz a mudança de cores
-                                    buttons[to]->setBackgroundColor(sf::Color(255,127,39));
-                                    ok = objJogo.getVidro(from).passarLiquido(objJogo.getVidro(to));
-                                    cout << "Passagem ok? " << ok << endl;
-                                    cout << "Fim do jogo? " << objJogo.fimDoJogo() << endl;
-                                } 
+                                    buttons[objJogo.getReceptor()]->setBackgroundColor(sf::Color(255,127,39));
+                                    objJogo.getVidro(objJogo.getDoador()).passarLiquido(objJogo.getVidro(objJogo.getReceptor()));
+                                }
                                 //Se a mudança de cores já foi feita
                                 else {
-                                    buttons[from]->setActive(false);
-                                    buttons[to]->setActive(false);
-                                    from = i;
-                                    buttons[from]->setBackgroundColor(sf::Color::Green);
-                                    to = -1;
+                                    buttons[objJogo.getDoador()]->setActive(false);
+                                    buttons[objJogo.getReceptor()]->setActive(false);
+                                    objJogo.atualizaDoador(i);
+                                    buttons[objJogo.getDoador()]->setBackgroundColor(sf::Color::Green);
+                                    objJogo.atualizaReceptor(-1);
                                 }
                                 buttons[i]->setActive(true);
                             }
@@ -96,16 +89,16 @@ int main() {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
                         fase++;
                         objJogo.iniciaJogo(fase);
-                        buttons[from]->setActive(false);
-                        buttons[to]->setActive(false);
-                        from = -1;
-                        to = -1;
+                        buttons[objJogo.getDoador()]->setActive(false);
+                        buttons[objJogo.getReceptor()]->setActive(false);
+                        objJogo.atualizaDoador(-1);
+                        objJogo.atualizaReceptor(-1);
                     }  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                         objJogo.iniciaJogo(fase);
-                        buttons[from]->setActive(false);
-                        buttons[to]->setActive(false);
-                        from = -1;
-                        to = -1;
+                        buttons[objJogo.getDoador()]->setActive(false);
+                        buttons[objJogo.getReceptor()]->setActive(false);
+                        objJogo.atualizaDoador(-1);
+                        objJogo.atualizaReceptor(-1);
                     } 
             }           
         }
