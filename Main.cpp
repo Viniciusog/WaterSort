@@ -38,24 +38,12 @@ int main() {
         buttons[i] = novoBotao;
     }
         
-<<<<<<< HEAD
-
-    // Aqui começa o controle da passagem de líquidos entre os potes
-    int from = -1;
-    int to = -1;
-
-    int ok = 1;
-
-=======
     //Aqui começa o controle da passagem de líquidos entre os potes
     int xCor, yCor, xPote, yPote, alturaVidro, larguraVidro, alturaCor, larguraCor;
->>>>>>> teste
         
     while (window.isOpen())
     {
         sf::Event event;
-        
-
         
         while (window.pollEvent(event))
         {
