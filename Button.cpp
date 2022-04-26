@@ -48,11 +48,16 @@ void Button::setText(string text) {
 }
 
 //Configura a posição das coordenadas do botão e também do texto no centro do botão
-void Button::setPosition(sf::Vector2f pos) {
+void Button::setPosition(sf::Vector2f pos, bool botaoEnd) {
     this->button.setPosition(pos);
 
     //Posições x e y do texto
-    float xPos = pos.x + this->button.getLocalBounds().width / 2 - this->text.getLocalBounds().width / 2;
+    float xPos;
+    if (botaoEnd == false) {
+        xPos = pos.x + this->button.getLocalBounds().width / 2 - this->text.getLocalBounds().width / 2;
+    } else {
+        xPos = pos.x;
+    }
     float yPos = pos.y + this->button.getLocalBounds().height / 2 - this->text.getLocalBounds().height / 2;
 
     this->text.setPosition({xPos, yPos});
@@ -83,6 +88,10 @@ bool Button::isMouseOver(sf::RenderWindow &window) {
     }
 
     return false;
+}
+
+float Button::getWidth() const {
+    return this->button.getSize().x;
 }
 
 void Button::setActive(bool act) {

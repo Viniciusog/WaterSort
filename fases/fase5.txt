@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 5
+=======
+7
+>>>>>>> teste
 2
 4
 
 background/imageFase1.jpg
 
-vermelho vermelho vermelho vermelho
-amarelo amarelo roxo azul
-amarelo azul azul azul
-amarelo roxo roxo roxo
+rosa roxo amarelo verde
+roxo verde ciano roxo
+rosa ciano verde ciano
+ciano amarelo rosa amarelo
+rosa roxo verde amarelo
+blank blank blank blank
 blank blank blank blank

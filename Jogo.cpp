@@ -6,6 +6,7 @@
 #include "Jogo.h"
 #include <SFML/Graphics.hpp>
 #include <fstream>
+#include "Button.h"
 using namespace std;
 
 sf::Color retornaCor(string nomeCor){
@@ -26,69 +27,57 @@ sf::Color retornaCor(string nomeCor){
     sf::Color preto(0, 0, 0);
     sf::Color branco(255, 255, 255);
 
-    /*determinacao da saida*/
-    if(nomeCor == "verde")
+    /* Determinacao da saida*/
+    if (nomeCor == "verde")
         return verde;
-    
-    if(nomeCor == "lima")
+    if (nomeCor == "lima")
         return lima;
-    if(nomeCor == "vermelho")
+    if (nomeCor == "vermelho")
         return vermelho;
-    if(nomeCor == "salmao")
+    if (nomeCor == "salmao")
         return verde;
-    if(nomeCor == "salmao")
+    if (nomeCor == "salmao")
         return verde;
-    if(nomeCor == "fuchsia")
+    if (nomeCor == "fuchsia")
         return fuchsia;
-    if(nomeCor == "roxo")
+    if (nomeCor == "roxo")
         return roxo;
-    if(nomeCor == "rosa")
+    if (nomeCor == "rosa")
         return rosa;
-    if(nomeCor == "azul")
+    if (nomeCor == "azul")
         return azul;
-    if(nomeCor == "navy")
+    if (nomeCor == "navy")
         return navy;
-    if(nomeCor == "ciano")
+    if (nomeCor == "ciano")
         return ciano;
-    if(nomeCor == "amarelo")
+    if (nomeCor == "amarelo")
         return amarelo;
-    if(nomeCor == "laranja")
+    if (nomeCor == "laranja")
         return laranja;
-    if(nomeCor == "preto")
+    if (nomeCor == "preto")
         return preto;
-
     /*Caso nao esteja listado, retorna branco*/
     return branco;   
 }
 
-Jogo::Jogo() {
-    this->fase = 1;
-    iniciaJogo(this->fase);
-}
-
-Jogo::Jogo(int fase) {
+Jogo::Jogo(int fase=1) {
     this->fase = fase;
     iniciaJogo(this->fase);
+    jogada.setDoador(-1);
+    jogada.setReceptor(-1);
 }
 
 Jogo::~Jogo() {
-    for(int i = 0; i < nVidros; i++)
-        delete [] conjunto[i];
-    delete [] conjunto;
+    cout << "Chamada do destrutor" << endl;
 }
-
 
 void Jogo::iniciaJogo(int fase) {
         this->fase = fase;
         getFase();
 
-        cout << "Vidros: " << nVidros << endl;
-        cout << "VidrosVazios: " << nVidrosVazios << endl;
-        cout << "Cores: " << nCores << endl;
-
         /*Alocando o conjunto*/
-        conjunto = new Vidro *[nVidros];
-        for (int i = 0; i < nVidros; i++) {
+        conjunto = new Vidro *[7];
+        for (int i = 0; i < 7; i++) {
             conjunto[i] = new Vidro(nCores);
         }   
         getVidros();
@@ -96,7 +85,7 @@ void Jogo::iniciaJogo(int fase) {
 
 //Retorna true se 4 dos 5 potes estiverem completos
 //(Um dos potes sempre irá ficar vazio ao final do jogo)
-bool Jogo::fimDoJogo(){
+bool Jogo::fimDoJogo() {
     int qtdSucesso = 0;
     for (int i = 0; i < nVidros; i++){
         if(conjunto[i]->verificaConcluida())
@@ -126,47 +115,44 @@ Vidro& Jogo::getVidro(int numConjunto) {
     return *conjunto[numConjunto];
 }
 
-
-bool Jogo::getVidros(){
+bool Jogo::getVidros() {
     fstream arquivo;
     arquivo.open("fases/fase"+to_string(fase)+".txt", ios::in);
-    if(!arquivo)
+    if (!arquivo)
         return false;
 
-    for (int i = 0; i < nVidros; i++) {
+    for (int i = 0; i < 7; i++) {
          while(!conjunto[i]->vazia()) {
              sf::Color color;
              conjunto[i]->pop(color);
          }
     }
 
-    /*pulandos os tres primeiros termos que sao os parametros do jogo*/
-    for(int k = 0; k < 4; k++){
-                string aux;
-                arquivo>>aux;
+    /*Pulandos os 4 primeiros termos que sao os parametros do jogo*/
+    for (int k = 0; k < 4; k++){
+        string aux;
+        arquivo >> aux;
     }
     /*Recebendo informacoes dos vidros*/
-    for(int i = 0; i < nVidros; i++){//percorre os vidros
-        for(int j = 0; j < nCores; j++){//em cada vidro empilha o numero de cores que cabe em cada pilha
+    for (int i = 0; i < 7; i++){   //percorre os vidros
+        for (int j = 0; j < nCores; j++) { //em cada vidro empilha o numero de cores que cabe em cada pilha
             string nomeCor;
             arquivo>>nomeCor;
-            if(nomeCor != "blank"){
+            if (nomeCor != "blank") {
                 conjunto[i]->push(retornaCor(nomeCor));
             }
         }
     }
-
     arquivo.close();
     return true;
 }
 
-/*Pega todas as informacoes de cada fase*/
-bool Jogo::getFase(){
+/*Pega todas as informacoes de cada fase */
+bool Jogo::getFase() {
     fstream arquivo;
     arquivo.open("fases/fase"+to_string(fase)+".txt", ios::in);
 
-    if(!arquivo) {
-        cout << "arquivo fechado" << endl;
+    if (!arquivo) {
         return false;
     }
 
@@ -179,7 +165,7 @@ bool Jogo::getFase(){
     return true;
 }
 
-int Jogo::getNVidros(){
+int Jogo::getNVidros() {
     return nVidros;
 }
 
@@ -195,51 +181,78 @@ string Jogo::getBackground() {
     return background;
 }
 
+void Jogo::atualizaDoador(int doador) {
+    jogada.setDoador(doador);
+}
+
+void Jogo::atualizaReceptor(int recp) {
+    jogada.setReceptor(recp);
+}
+
+int Jogo::getDoador() const {
+    return jogada.getDoador();
+}
+
+int Jogo::getReceptor() const {
+    return jogada.getReceptor();
+}
+
 /*Desenha os vidros na tela*/
-void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo){
+void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo, Button **buttons) {
+
+        int nVidros = objJogo.getNVidros();
         /*Determinando as posicoes*/
-        int xCor = 100;
+        int larguraVidro = 78;
+        int alturaVidro = 240;
+        int larguraCor = larguraVidro;
+        int alturaCor = alturaVidro / objJogo.getNCores();
+        
+        int tamanhoTotal = nVidros * (larguraVidro + 2) + (nVidros - 1) * (136-larguraVidro);
+        int xCentro = 540;
+
+        int xCor = xCentro - (tamanhoTotal / 2);
         int yCor = 300;
         int xPote = xCor + 1;
         int yPote = yCor + 20;
-        int alturaVidro = 240;
-        int larguraVidro = 80;
-        int larguraCor = larguraVidro;
-        int alturaCor = alturaVidro / objJogo.getNCores();
-
+       
         //Desenha os 5 potes na tela de forma automática
         for(int i = 0; i < objJogo.getNVidros(); i++) {
-            /*parede esquerda do vidro*/
+            /*Parede esquerda do vidro*/
             sf::RectangleShape linha1(sf::Vector2f(1.f, 20 + alturaVidro));
             linha1.setPosition(xCor, yCor);
-
-            /*parede de baixo do vidro*/
+            
+            /*Parede de baixo do vidro*/
             sf::RectangleShape linha2(sf::Vector2f(larguraVidro + 2, 1.f));
             linha2.setPosition(xCor, yPote + alturaVidro); 
 
-            /*parede direita do vidro*/
+            /*Parede direita do vidro*/
             sf::RectangleShape linha3(sf::Vector2f(1.f, 20 + alturaVidro));
             linha3.setPosition(xCor + larguraVidro + 1, yCor);
 
-            /*desenhando as paredes*/
+            float yBotao = yPote + alturaVidro + 30;
+            float xBotao = xCor + (larguraVidro + 2 - buttons[i]->getWidth()) / 2;
+            buttons[i]->setPosition({xBotao, yBotao}, false);
+            buttons[i]->drawTo(window);
+
+            /*Desenhando as paredes*/
             window.draw(linha1);
             window.draw(linha2);
             window.draw(linha3);
 
-            /*desenhando as cores*/
-            for (int j = objJogo.getNCores() - 1; j >= 0; j--) {
+            /*Dsenhando as cores*/
+            for (int j = objJogo.getNCores() -1; j >= 0; j--) {
                 sf::RectangleShape shape1(sf::Vector2f(larguraCor, alturaCor));
 
-                /*caso a cor nao seja vazia*/
-                if (objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
+                /*Caso a cor nao seja vazia*/
+                if(objJogo.getCorDePote(i, j) != sf::Color(0, 0, 0)){
                     shape1.setFillColor(objJogo.getCorDePote(i, j));
                     shape1.setPosition(xPote, yPote);
                     window.draw(shape1);
                 }    
                 yPote += alturaCor;
             }
-            //incrementando os valores  das posicoes dos potes
-            xCor += alturaCor + 1 + 100;
+            //Incrementando os valores  das posicoes dos potes
+            xCor += 1 + 135;
             yPote = yCor + 20;
             xPote = xCor + 1;
         }

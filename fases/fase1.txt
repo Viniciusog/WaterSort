@@ -4,5 +4,10 @@
 
 background/imageFase2.png
 
-vermelho blank blank
-vermelho vermelho blank
+vermelho vermelho vermelho verde
+verde verde verde vermelho
+blank blank blank blank
+blank blank blank blank
+blank blank blank blank
+blank blank blank blank
+blank blank blank blank

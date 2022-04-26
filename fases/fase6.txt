@@ -1,10 +1,13 @@
+3
+1
 4
-2
-2
 
 background/imageFase1.jpg
 
-rosa blank
-azul blank
-azul blank
-rosa blank
+azul azul azul verde
+verde verde verde azul
+blank blank blank blank
+blank blank blank blank
+blank blank blank blank
+blank blank blank blank
+blank blank blank blank
