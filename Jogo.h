@@ -12,22 +12,34 @@
 
 class Jogo {
     public:
-        Jogo(int nVidros, int nCores); //Embaralha as cores entre os potes e deixa tudo pronto para começar
+        Jogo();
+        Jogo(int fase);
         ~Jogo();
-        void iniciaJogo();
-        void atualizaMatrizCores(); //Define as cores para os quadrados da tela
+        void iniciaJogo(int fase);
         //void input(); //Recebe do jogador qual é a próxima jogada
         bool fimDoJogo(); //Define quando o jogo chegou ao fim, ou seja, foi concluido
-        sf::Color getCorMatriz(int conjunto, int elemento); // Pega uma cor que está na matriz de cores
         sf::Color getCorDePote(int numConjunto, int elemento); // Pega uma cor que está em um dos potes
         Vidro& getVidro(int numConjunto);
+        /*Pega todas as informacoes necessaria pra criar a fase*/
+        bool getFase();
+        bool getVidros();
+        /*getters de informacoes da fase*/
+        int getNVidros();
+        int getNVidrosVazios();
+        int getNCores();
+        std::string getBackground();
     private:
-        //bool embaralha();//ainda nao feito
-        sf::Color ** matrizDeCores;//[potes][liquidos]
-        Vidro ** conjunto;
+        Vidro **conjunto;
         int nVidros;
+        int nVidrosVazios;
         int nCores;
-        Jogada jogada;//define qual vidro deve passar e qual deve receber
+        int fase;
+        std::string background;
+        Jogada jogada; //define qual vidro deve passar e qual deve receber
+
+    /*retorna a cor dada pela string*/
+    friend sf::Color retornaCor(std::string nomeCor);
+    friend void desenhaVidros(sf::RenderWindow & window, Jogo &objJogo);
 };
 
 #endif
